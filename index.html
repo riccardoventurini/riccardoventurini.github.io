@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mario Rossi</title>
+
+  <!-- Font Google -->
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Variabili ── */
+    :root {
+      --sfondo:   #faf8f4;
+      --testo:    #1a1a18;
+      --accento:  #2a5c8f;
+      --grigio:   #6b6b65;
+      --bordo:    #e0ddd6;
+    }
+
+    /* ── Reset ── */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--sfondo);
+      color: var(--testo);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 1.1rem;
+      line-height: 1.75;
+    }
+
+    a {
+      color: var(--accento);
+      text-decoration: none;
+    }
+    a:hover { text-decoration: underline; }
+
+    /* ── Navigazione ── */
+    nav {
+      border-bottom: 1px solid var(--bordo);
+      padding: 1rem 2rem;
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      background: var(--sfondo);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav .nome {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--testo);
+      text-decoration: none;
+      margin-right: auto;
+    }
+
+    nav a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--grigio);
+      letter-spacing: 0.03em;
+    }
+    nav a:hover { color: var(--accento); text-decoration: none; }
+
+    /* ── Layout principale ── */
+    .contenitore {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    /* ── Sidebar sinistra ── */
+    .sidebar {
+      text-align: center;
+    }
+
+    .sidebar img {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--bordo);
+      margin-bottom: 1rem;
+      background: var(--bordo);
+    }
+
+    .sidebar h2 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .sidebar .affiliazione {
+      font-size: 0.9rem;
+      color: var(--grigio);
+      margin-bottom: 1rem;
+      font-family: 'DM Mono', monospace;
+    }
+
+    /* Link social nella sidebar */
+    .social {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      margin-top: 1rem;
+      font-size: 0.88rem;
+    }
+
+    .social a {
+      color: var(--grigio);
+    }
+    .social a:hover { color: var(--accento); }
+
+    /* ── Contenuto principale ── */
+    .principale h1 {
+      font-size: 2rem;
+      font-weight: 400;
+      font-style: italic;
+      margin-bottom: 1.5rem;
+      line-height: 1.3;
+      color: var(--testo);
+    }
+
+    .principale p {
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+    /* ── Sezione pubblicazioni / lavori ── */
+    .sezione {
+      margin-top: 3rem;
+      border-top: 1px solid var(--bordo);
+      padding-top: 2rem;
+    }
+
+    .sezione h2 {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--grigio);
+      margin-bottom: 1.5rem;
+    }
+
+    /* Un singolo lavoro / pubblicazione */
+    .lavoro {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--bordo);
+    }
+
+    .lavoro:last-child {
+      border-bottom: none;
+    }
+
+    .lavoro .titolo-lavoro {
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+
+    .lavoro .autori {
+      font-size: 0.92rem;
+      color: var(--grigio);
+      margin: 0.2rem 0;
+    }
+
+    .lavoro .rivista {
+      font-style: italic;
+      font-size: 0.92rem;
+      color: var(--grigio);
+    }
+
+    .lavoro .links {
+      margin-top: 0.4rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    /* ── Interventi pubblici / media ── */
+    .media-lista {
+      list-style: none;
+    }
+
+    .media-lista li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--bordo);
+      font-size: 0.95rem;
+    }
+
+    .media-lista li:last-child { border-bottom: none; }
+
+    .media-lista .fonte {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--grigio);
+      margin-right: 0.5rem;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--bordo);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--grigio);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 700px) {
+      .contenitore {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .sidebar { text-align: left; }
+      .sidebar img { width: 100px; height: 100px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGAZIONE -->
+  <nav>
+    <a class="nome" href="#">Mario Rossi</a>
+    <a href="#pubblicazioni">Pubblicazioni</a>
+    <a href="https://scholar.google.com" target="_blank">Google Scholar</a>
+    <a href="cv.pdf" target="_blank">CV</a>
+  </nav>
+
+  <!-- CONTENUTO PRINCIPALE -->
+  <div class="contenitore">
+
+    <!-- SIDEBAR SINISTRA -->
+    <aside class="sidebar">
+      <!-- Sostituisci "profilo.jpg" con il percorso della tua foto -->
+      <img src="profilo.jpg" alt="Foto profilo Mario Rossi" />
+
+      <h2>Mario Rossi</h2>
+      <div class="affiliazione">Università degli Studi di Milano</div>
+
+      <!-- LINK SOCIAL -->
+      <div class="social">
+        <a href="mailto:mario@email.it">✉ Email</a>
+        <a href="https://twitter.com/tuoaccount" target="_blank">𝕏 Twitter</a>
+        <a href="https://linkedin.com/in/tuoaccount" target="_blank">in LinkedIn</a>
+        <a href="https://github.com/tuoaccount" target="_blank">⌥ GitHub</a>
+        <a href="https://scholar.google.com" target="_blank">Scholar</a>
+      </div>
+    </aside>
+
+    <!-- TESTO PRINCIPALE -->
+    <main class="principale">
+
+      <!-- BIO: scrivi qui chi sei -->
+      <h1>Ricercatore in [il tuo campo] presso [la tua istituzione].</h1>
+
+      <p>
+        Scrivi qui una presentazione di te stesso. Di cosa ti occupi? Quali sono le domande
+        di ricerca che ti interessano? Puoi usare più paragrafi per descrivere il tuo lavoro,
+        i tuoi metodi e i tuoi obiettivi.
+      </p>
+
+      <p>
+        Questo secondo paragrafo può approfondire un progetto specifico, una collaborazione
+        o un approccio metodologico che ti distingue.
+      </p>
+
+      <!-- PUBBLICAZIONI -->
+      <div class="sezione" id="pubblicazioni">
+        <h2>Pubblicazioni recenti</h2>
+
+        <!-- LAVORO 1 — copia e incolla questo blocco per aggiungerne altri -->
+        <div class="lavoro">
+          <div class="titolo-lavoro">Titolo del tuo primo articolo o progetto</div>
+          <div class="autori">Rossi M., Bianchi A., Verdi C.</div>
+          <div class="rivista">Nature, 2024</div>
+          <div class="links">
+            <a href="#">PDF</a>
+            <a href="#">arXiv</a>
+            <a href="#">GitHub</a>
+          </div>
+        </div>
+
+        <!-- LAVORO 2 -->
+        <div class="lavoro">
+          <div class="titolo-lavoro">Titolo del secondo articolo</div>
+          <div class="autori">Rossi M., Ferri L.</div>
+          <div class="rivista">Science, 2023</div>
+          <div class="links">
+            <a href="#">PDF</a>
+            <a href="#">DOI</a>
+          </div>
+        </div>
+
+        <!-- LAVORO 3 -->
+        <div class="lavoro">
+          <div class="titolo-lavoro">Titolo del terzo lavoro o preprint</div>
+          <div class="autori">Rossi M. et al.</div>
+          <div class="rivista">arXiv, 2023</div>
+          <div class="links">
+            <a href="#">arXiv</a>
+          </div>
+        </div>
+
+      </div><!-- fine pubblicazioni -->
+
+      <!-- MEDIA / INTERVENTI PUBBLICI -->
+      <div class="sezione">
+        <h2>Interventi pubblici</h2>
+
+        <ul class="media-lista">
+          <li>
+            <span class="fonte">Corriere della Sera</span>
+            <a href="#">Titolo dell'articolo o intervista</a>
+          </li>
+          <li>
+            <span class="fonte">RAI Radio 3</span>
+            <a href="#">Titolo della puntata o intervento</a>
+          </li>
+          <li>
+            <span class="fonte">Convegno XYZ</span>
+            <a href="#">Titolo del talk o della presentazione</a>
+          </li>
+        </ul>
+      </div>
+
+    </main>
+  </div><!-- fine contenitore -->
+
+  <!-- FOOTER -->
+  <footer>
+    © 2025 Mario Rossi
+  </footer>
+
+</body>
+</html>

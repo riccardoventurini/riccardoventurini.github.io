@@ -55,7 +55,7 @@
       text-decoration: none;
       margin-right: auto;
     }
-
+    
     nav a {
       font-family: 'DM Mono', monospace;
       font-size: 0.78rem;
@@ -63,6 +63,11 @@
       letter-spacing: 0.03em;
     }
     nav a:hover { color: var(--accento); text-decoration: none; }
+
+    nav a.nav-main {
+      font-size: 1rem;
+      color: var(--testo);
+    }
 
     /* ── Layout principale ── */
     .contenitore {
@@ -210,8 +215,8 @@
   <!-- NAVIGATION -->
   <nav>
     <a class="nome" href="#">Riccardo Venturini</a>
-    <a href="https://scholar.google.com/citations?user=OMVQ6e0AAAAJ&hl=en">Publications</a>
-    <a href="cv_venturini.pdf" target="_blank">CV</a>
+    <a class="nav-main" href="https://scholar.google.com/citations?user=OMVQ6e0AAAAJ&hl=en">Publications</a>
+    <a class="nav-main" href="cv_venturini.pdf" target="_blank">CV</a>
   </nav>
 
   <!-- CONTENUTO PRINCIPALE -->
@@ -226,7 +231,7 @@
 
       <!-- SOCIAL LINKS -->
       <div class="social">
-        <a href="mailto:riccardo.ventrini@iusspavia.it">Email</a>
+        <a href="mailto:riccardo.venturini@iusspavia.it">Email</a>
         <a href="https://x.com/ric_venturini" target="_blank">Twitter</a>
         <a href="https://bsky.app/profile/riccardoventurini.bsky.social" target="_blank">Bluesky</a>
         <a href="https://www.linkedin.com/in/riccardoventurini99/" target="_blank">LinkedIn</a>
@@ -269,7 +274,7 @@
 
       <!-- PUBLICATIONS -->
       <div class="sezione" id="publications">
-        <h2>Recent publications</h2>
+        <h2>Publications</h2>
 
         <!-- PAPER 1 — copy and paste this block to add more -->
         <div class="lavoro">

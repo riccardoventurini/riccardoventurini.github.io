@@ -290,8 +290,12 @@
 
   <!-- FOOTER -->
   <footer>
-    © 2025 Riccardo Venturini
+  © Riccardo Venturini - Last updated <span id="lastModified"></span>
   </footer>
+  
+  <script>
+    document.getElementById("lastModified").textContent = document.lastModified;
+  </script>
 
 </body>
 </html>

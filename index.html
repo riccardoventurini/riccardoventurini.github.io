@@ -5,44 +5,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Riccardo Venturini</title>
 
-  <!-- Font Google -->
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
 
   <style>
-    /* ── Variabili ── */
     :root {
-      --sfondo:   #faf8f4;
-      --testo:    #1a1a18;
-      --accento:  #2a5c8f;
-      --grigio:   #6b6b65;
-      --bordo:    #e0ddd6;
+      --background: #faf8f4;
+      --text: #1a1a18;
+      --accent: #2a5c8f;
+      --gray: #6b6b65;
+      --border: #e0ddd6;
     }
 
-    /* ── Reset ── */
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      background: var(--sfondo);
-      color: var(--testo);
+      background: var(--background);
+      color: var(--text);
       font-family: 'EB Garamond', Georgia, serif;
       font-size: 1.1rem;
       line-height: 1.75;
     }
 
     a {
-      color: var(--accento);
+      color: var(--accent);
       text-decoration: none;
     }
     a:hover { text-decoration: underline; }
 
-    /* ── Navigazione ── */
     nav {
-      border-bottom: 1px solid var(--bordo);
+      border-bottom: 1px solid var(--border);
       padding: 1rem 2rem;
       display: flex;
       gap: 2rem;
       align-items: center;
-      background: var(--sfondo);
+      background: var(--background);
       position: sticky;
       top: 0;
       z-index: 10;
@@ -51,26 +48,25 @@
     nav .name {
       font-family: 'DM Mono', monospace;
       font-size: 1rem;
-      color: var(--testo);
+      color: var(--text);
       text-decoration: none;
       margin-right: auto;
     }
-    
+
     nav a {
       font-family: 'DM Mono', monospace;
       font-size: 0.78rem;
-      color: var(--grigio);
+      color: var(--gray);
       letter-spacing: 0.03em;
     }
-    nav a:hover { color: var(--accento); text-decoration: none; }
+    nav a:hover { color: var(--accent); text-decoration: none; }
 
     nav a.nav-main {
       font-size: 1rem;
-      color: var(--testo);
+      color: var(--text);
     }
 
-    /* ── Layout principale ── */
-    .contenitore {
+    .container {
       max-width: 960px;
       margin: 0 auto;
       padding: 3rem 2rem;
@@ -80,7 +76,6 @@
       align-items: start;
     }
 
-    /* ── Sidebar sinistra ── */
     .sidebar {
       text-align: center;
     }
@@ -90,9 +85,9 @@
       height: 160px;
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid var(--bordo);
+      border: 3px solid var(--border);
       margin-bottom: 1rem;
-      background: var(--bordo);
+      background: var(--border);
     }
 
     .sidebar h2 {
@@ -101,14 +96,13 @@
       margin-bottom: 0.25rem;
     }
 
-    .sidebar .affiliazione {
+    .sidebar .affiliation {
       font-size: 0.9rem;
-      color: var(--grigio);
+      color: var(--gray);
       margin-bottom: 1rem;
       font-family: 'DM Mono', monospace;
     }
 
-    /* Link social nella sidebar */
     .social {
       display: flex;
       flex-direction: column;
@@ -118,69 +112,66 @@
     }
 
     .social a {
-      color: var(--grigio);
+      color: var(--gray);
     }
-    .social a:hover { color: var(--accento); }
+    .social a:hover { color: var(--accent); }
 
-    /* ── Contenuto principale ── */
-    .principale h1 {
+    .main h1 {
       font-size: 2rem;
       font-weight: 400;
       margin-bottom: 1.5rem;
       line-height: 1.3;
-      color: var(--testo);
+      color: var(--text);
     }
 
-    .principale p {
+    .main p {
       margin-bottom: 1rem;
       color: #333;
     }
 
-    /* ── Sezione pubblicazioni / lavori ── */
-    .sezione {
+    .section {
       margin-top: 3rem;
-      border-top: 1px solid var(--bordo);
+      border-top: 1px solid var(--border);
       padding-top: 2rem;
     }
 
-    .sezione h2 {
+    .section h2 {
       font-family: 'DM Mono', monospace;
       font-size: 0.8rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--grigio);
+      color: var(--gray);
       margin-bottom: 1.5rem;
     }
 
-    /* Un singolo lavoro / pubblicazione */
-    .lavoro {
+    .work {
       margin-bottom: 1.5rem;
       padding-bottom: 1.5rem;
-      border-bottom: 1px solid var(--bordo);
+      border-bottom: 1px solid var(--border);
     }
 
-    .lavoro:last-child {
+    .work:last-child {
       border-bottom: none;
     }
 
-    .lavoro .titolo-lavoro {
+    .work .title {
       font-weight: 600;
       font-size: 1.05rem;
     }
 
-    .lavoro .autori {
+    .work .authors {
       font-size: 0.92rem;
-      color: var(--grigio);
+      color: var(--gray);
       margin: 0.2rem 0;
     }
 
-    .lavoro .rivista {
+    .work .journal {
       font-style: italic;
       font-size: 0.92rem;
-      color: var(--grigio);
+      color: var(--gray);
     }
 
-    .lavoro .links {
+    .work .links {
       margin-top: 0.4rem;
       font-family: 'DM Mono', monospace;
       font-size: 0.78rem;
@@ -188,19 +179,17 @@
       gap: 1rem;
     }
 
-    /* ── Footer ── */
     footer {
-      border-top: 1px solid var(--bordo);
+      border-top: 1px solid var(--border);
       padding: 1.5rem 2rem;
       text-align: center;
       font-family: 'DM Mono', monospace;
       font-size: 0.75rem;
-      color: var(--grigio);
+      color: var(--gray);
     }
 
-    /* ── Responsive ── */
     @media (max-width: 700px) {
-      .contenitore {
+      .container {
         grid-template-columns: 1fr;
         gap: 2rem;
       }
@@ -212,24 +201,20 @@
 
 <body>
 
-  <!-- NAVIGATION -->
   <nav>
     <span class="name">Riccardo Venturini</span>
     <a class="nav-main" href="https://scholar.google.com/citations?user=OMVQ6e0AAAAJ&hl=en">Publications</a>
     <a class="nav-main" href="cv_venturini.pdf" target="_blank">CV</a>
   </nav>
 
-  <!-- CONTENUTO PRINCIPALE -->
-  <div class="contenitore">
+  <div class="container">
 
-    <!-- LEFT SIDEBAR -->
     <aside class="sidebar">
       <img src="foto_profilo_cropped.png" alt="Profile photo Riccardo Venturini" />
 
       <h2>Riccardo Venturini, MSc</h2>
-      <div class="affiliazione">IUSS Pavia</div>
+      <div class="affiliation">IUSS Pavia</div>
 
-      <!-- SOCIAL LINKS -->
       <div class="social">
         <a href="mailto:riccardo.venturini@iusspavia.it">Email</a>
         <a href="https://x.com/ric_venturini" target="_blank">Twitter</a>
@@ -239,56 +224,51 @@
       </div>
     </aside>
 
-    <!-- MAIN CONTENT -->
-    <main class="principale">
+    <main class="main">
 
-      <!-- BIO: write here who you are -->
-      <h1>PhD student</h1>
+      <h1>PhD Student</h1>
 
       <p>
-        I'm an aspiring cognitive neuroscientist. I'm currently investigating how the brain builds 
+        I am an aspiring cognitive neuroscientist. I am currently investigating how the brain constructs 
         meaning from sound and how it represents different levels of linguistic processing when listening to 
         naturalistic speech while its electrophysiological activity is recorded.
       </p>
 
       <p>
-        I'm passionate about prediction in the brain, research methodology, long inconclusive conversations about politics 
-        and society, and bikepacking. 
+        I am interested in prediction in the brain, research methodology, long inconclusive conversations about politics 
+        and society, and bikepacking.
       </p>
 
       <p>
-        <strong>Current position</strong><br>
+        <strong>Current Position</strong><br>
         - PhD student in Theoretical and Experimental Linguistics, IUSS Pavia, Pavia (IT)
       </p>
 
       <p>
         <strong>Education</strong><br>
-        - Post-Graduate Supervised Internship, “S. Chiara” University-Hospital, Trento (IT), 2024<br>
-        - MSc in Psychology (Neuroscience curriculum), University of Trento, Trento (IT), 2023<br>
-        - BSc in Psychological Science, University of Padova, Padova (IT), 2021
+        - Postgraduate Supervised Internship, “S. Chiara” University Hospital, Trento (IT), 2024<br>
+        - MSc in Psychology (Neuroscience track), University of Trento, Trento (IT), 2023<br>
+        - BSc in Psychological Science, University of Padua, Padua (IT), 2021
       </p>
 
-      <!-- PUBLICATIONS -->
-      <div class="sezione" id="publications">
+      <div class="section" id="publications">
         <h2>Publications</h2>
 
-        <!-- PAPER 1 — copy and paste this block to add more -->
-        <div class="lavoro">
-          <div class="titolo-lavoro">Maximizing tumor resection and managing cognitive attentional outcomes: measures of impact of awake surgery in glioma treatment</div>
-          <div class="autori">Zigiotto, L.<sup>*</sup>, <strong>Venturini, R.<sup>*</sup></strong>, Coletta, L., Venturini, M., Dal Monte, D., Vavassori, L., Corsini, F., Annicchiarico, L., Avesani, P., Papagno, C., Sarubbo, S.</div>
-          <div class="rivista">Neurosurgery, 2026</div>
+        <div class="work">
+          <div class="title">Maximizing tumor resection and managing cognitive attentional outcomes: measures of impact of awake surgery in glioma treatment</div>
+          <div class="authors">Zigiotto, L.<sup>*</sup>, <strong>Venturini, R.<sup>*</sup></strong>, Coletta, L., Venturini, M., Dal Monte, D., Vavassori, L., Corsini, F., Annicchiarico, L., Avesani, P., Papagno, C., Sarubbo, S.</div>
+          <div class="journal">Neurosurgery, 2026</div>
           <div class="links">
             <a href="https://doi.org/10.1227/neu.0000000000003591">DOI</a>
             <a href="Zigiotto, Venturini et al (2026) - Neurosurgery.pdf">PDF</a>
           </div>
         </div>
 
-      </div><!-- end publications -->
+      </div>
 
     </main>
-  </div><!-- end container -->
+  </div>
 
-  <!-- FOOTER -->
   <footer>
   © Riccardo Venturini - Last updated <span id="lastModified"></span>
   </footer>

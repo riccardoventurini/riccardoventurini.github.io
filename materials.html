@@ -54,37 +54,11 @@
       text-decoration: underline;
     }
 
-    nav {
-      border-bottom: 1px solid var(--border);
-      padding: 1rem 2rem;
-      display: flex;
-      gap: 2rem;
-      align-items: center;
-      background: var(--background);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-
-    nav .name {
+    .back {
+      display: inline-block;
+      margin-bottom: 2rem;
       font-family: 'DM Mono', monospace;
-      font-size: 1rem;
-      color: var(--text);
-      text-decoration: none;
-      margin-right: auto;
-    }
-
-    nav a {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.78rem;
-      color: var(--gray);
-      letter-spacing: 0.03em;
-    }
-    nav a:hover { color: var(--accent); text-decoration: none; }
-
-    nav a.nav-main {
-      font-size: 1rem;
-      color: var(--text);
+      font-size: 0.85rem;
     }
 
     .container {
@@ -119,14 +93,9 @@
 
 <body>
 
-  <nav>
-    <a class="name" href="index.html">Riccardo Venturini</a>
-    <a class="nav-main" href="https://scholar.google.com/citations?user=OMVQ6e0AAAAJ&hl=en">Publications</a>
-    <a class="nav-main" href="cv_venturini.pdf" target="_blank">CV</a>
-    <a class="nav-main" href="materials.html">Materials</a>
-  </nav>
-
   <div class="container">
+
+    <a class="back" href="index.html">← Back to homepage</a>
 
   <h1>Materials</h1>
 

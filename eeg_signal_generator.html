@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EEG Signal Generator</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #faf8f4;
+    --surface: #ffffff;
+    --surface2: #f0ede8;
+    --border: rgba(0,0,0,0.1);
+    --text: #1a1a18;
+    --text2: #6b6a66;
+    --text3: #a09f9b;
+    --blue: #2563c4;
+    --blue-bg: #e8f0fd;
+    --blue-text: #1a3a7a;
+    --radius: 8px;
+    --radius-lg: 12px;
+  }
+
+  body {
+    font-family: 'Georgia', serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 2rem 1rem;
+  }
+
+  .container { max-width: 820px; margin: 0 auto; }
+
+  .back {
+    display: inline-block;
+    margin-bottom: 2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: #2a5c8f;
+    text-decoration: none;
+  }
+  .back:hover { text-decoration: underline; }
+
+  header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border);
+  }
+  header h1 {
+    font-size: 1.6rem;
+    font-weight: normal;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+  header p {
+    font-size: 0.875rem;
+    color: var(--text2);
+    margin-top: 4px;
+    font-family: 'Courier New', monospace;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .section-title {
+    font-size: 0.68rem;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text3);
+    font-family: 'Courier New', monospace;
+    margin-bottom: 0.75rem;
+  }
+
+  /* Slider globale */
+  input[type=range] {
+    flex: 1;
+    -webkit-appearance: none;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--blue);
+    border: 2px solid white;
+    box-shadow: 0 0 0 1px var(--blue);
+  }
+  input[type=range]::-moz-range-thumb {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--blue);
+    border: 2px solid white;
+    box-shadow: 0 0 0 1px var(--blue);
+  }
+
+  /* Controlli parametri globali */
+  .ctrl-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .ctrl-label {
+    font-size: 0.8rem;
+    color: var(--text2);
+    min-width: 200px;
+    font-family: 'Courier New', monospace;
+  }
+  .ctrl-val {
+    font-size: 0.8rem;
+    font-weight: bold;
+    min-width: 60px;
+    text-align: right;
+    font-family: 'Courier New', monospace;
+    color: var(--text);
+  }
+
+  /* Stat card */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 1.25rem;
+  }
+  .stat {
+    background: var(--surface2);
+    border-radius: var(--radius);
+    padding: 10px 14px;
+  }
+  .stat .sl {
+    font-size: 0.7rem;
+    color: var(--text3);
+    font-family: 'Courier New', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+  .stat .sv {
+    font-size: 1.35rem;
+    font-weight: normal;
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+
+  /* Tabella bande */
+  .bands-header, .band-row {
+    display: grid;
+    grid-template-columns: 20px 70px 70px 1fr 50px 100px;
+    gap: 8px;
+    align-items: center;
+    padding: 6px 2px;
+  }
+  .bands-header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+    margin-bottom: 2px;
+  }
+  .band-row { border-top: 1px solid rgba(0,0,0,0.05); }
+  .col-header {
+    font-size: 0.65rem;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-family: 'Courier New', monospace;
+  }
+  .band-row input[type=checkbox] {
+    width: 15px; height: 15px;
+    accent-color: var(--blue);
+    cursor: pointer;
+  }
+  .band-row label {
+    font-size: 0.8rem;
+    font-family: 'Courier New', monospace;
+    color: var(--text);
+    cursor: pointer;
+  }
+  .band-sub {
+    font-size: 0.72rem;
+    color: var(--text3);
+    font-family: 'Courier New', monospace;
+  }
+  .amp-val {
+    font-size: 0.8rem;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+    text-align: right;
+    color: var(--text);
+  }
+  .color-dot {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+  .dot-label { font-size: 0.7rem; color: var(--text3); font-family: 'Courier New', monospace; }
+
+  /* Pulsanti azione */
+  .btn-row { display: flex; gap: 10px; margin-bottom: 1.25rem; }
+
+  button.action {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 8px 18px;
+    font-size: 0.8rem;
+    font-family: 'DM Mono', monospace;
+    cursor: pointer;
+    color: var(--text);
+    transition: background 0.15s, border-color 0.15s;
+  }
+  button.action:hover { background: var(--surface2); border-color: var(--blue); }
+  button.action:active { transform: scale(0.98); }
+  button.action:disabled { opacity: 0.4; cursor: not-allowed; }
+  button.action:disabled:hover { background: var(--surface); border-color: var(--border); }
+
+  button.action.primary {
+    flex: 1;
+    background: var(--blue-bg);
+    color: var(--blue-text);
+    border-color: transparent;
+    font-weight: bold;
+  }
+  button.action.primary:hover { background: #d0e2fb; }
+
+  /* Chart */
+  .chart-wrap { position: relative; width: 100%; height: 170px; }
+  .chart-wrap-sm { position: relative; width: 100%; height: 140px; margin-top: 14px; }
+  .chart-label {
+    font-size: 0.7rem;
+    color: var(--text3);
+    font-family: 'Courier New', monospace;
+    margin-top: 4px;
+  }
+  .chart-label span { color: var(--blue); }
+
+  hr { border: none; border-top: 1px solid var(--border); margin: 1.25rem 0; }
+
+  footer {
+    border-top: 1px solid var(--border);
+    margin-top: 2rem;
+    padding: 1.5rem 0;
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text2);
+  }
+  footer a { color: #2a5c8f; text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #141412;
+      --surface: #1e1d1b;
+      --surface2: #252420;
+      --border: rgba(255,255,255,0.1);
+      --text: #f0ede8;
+      --text2: #9a9993;
+      --text3: #5a5955;
+      --blue: #5b8ef0;
+      --blue-bg: #1a2640;
+      --blue-text: #a0bef8;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <a class="back" href="materials.html">← Back to materials</a>
+
+  <header>
+    <h1>EEG Signal Generator</h1>
+    <p>synthetic signal · selectable bands · CSV export</p>
+  </header>
+
+  <div class="card">
+    <p class="section-title">Global parameters</p>
+    <div class="ctrl-row">
+      <span class="ctrl-label">Sampling frequency (Hz)</span>
+      <input type="range" id="fs-slider" min="100" max="1000" value="256" step="1">
+      <span class="ctrl-val" id="fs-val">256 Hz</span>
+    </div>
+    <div class="ctrl-row">
+      <span class="ctrl-label">Signal duration (s)</span>
+      <input type="range" id="dur-slider" min="1" max="10" value="2" step="1">
+      <span class="ctrl-val" id="dur-val">2 s</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="section-title">Frequency bands</p>
+    <div class="bands-header">
+      <span></span>
+      <span class="col-header">Band</span>
+      <span class="col-header">Range</span>
+      <span class="col-header">Amplitude</span>
+      <span class="col-header">µV</span>
+      <span class="col-header">Color</span>
+    </div>
+    <div id="bands-container"></div>
+  </div>
+
+  <div class="btn-row">
+    <button class="action primary" id="btn-generate">▶ Generate signal</button>
+    <button class="action" id="btn-download" disabled>↓ Download CSV</button>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat">
+      <p class="sl">Total samples</p>
+      <p class="sv" id="stat-samples">—</p>
+    </div>
+    <div class="stat">
+      <p class="sl">Active bands</p>
+      <p class="sv" id="stat-bands">—</p>
+    </div>
+    <div class="stat">
+      <p class="sl">Peak amplitude</p>
+      <p class="sv" id="stat-peak">—</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="section-title">Composed EEG signal</p>
+    <div class="chart-wrap">
+      <canvas id="chart-main" role="img" aria-label="Composed EEG signal over time">No signal generated yet.</canvas>
+    </div>
+    <p class="chart-label" id="info-label">Select bands and press "Generate signal"</p>
+
+    <hr>
+
+    <p class="section-title">Individual bands</p>
+    <div class="chart-wrap-sm">
+      <canvas id="chart-bands" role="img" aria-label="Individual frequency bands">No signal generated yet.</canvas>
+    </div>
+    <p class="chart-label" id="bands-label">&nbsp;</p>
+  </div>
+
+  <footer>
+    © Riccardo Venturini — Last updated <span id="lastModified"></span> ·
+    <a href="materials.html">← Back to materials</a>
+  </footer>
+
+</div>
+
+<script>
+const BANDS = [
+  { id: "delta", label: "Delta", sub: "< 4 Hz",   freqDefault: 2,  ampDefault: 50, color: "#534AB7", enabled: true  },
+  { id: "theta", label: "Theta", sub: "4–8 Hz",   freqDefault: 6,  ampDefault: 30, color: "#0F6E56", enabled: false },
+  { id: "alpha", label: "Alpha", sub: "8–13 Hz",  freqDefault: 10, ampDefault: 40, color: "#D85A30", enabled: true  },
+  { id: "beta",  label: "Beta",  sub: "13–30 Hz", freqDefault: 20, ampDefault: 20, color: "#993556", enabled: false },
+  { id: "gamma", label: "Gamma", sub: "> 30 Hz",  freqDefault: 40, ampDefault: 10, color: "#185FA5", enabled: false },
+];
+
+const container = document.getElementById("bands-container");
+
+BANDS.forEach(b => {
+  const row = document.createElement("div");
+  row.className = "band-row";
+  row.innerHTML = `
+    <input type="checkbox" id="chk-${b.id}" ${b.enabled ? "checked" : ""}>
+    <label for="chk-${b.id}">${b.label}</label>
+    <span class="band-sub">${b.sub}</span>
+    <input type="range" id="amp-${b.id}" min="0" max="100" value="${b.ampDefault}" step="1">
+    <span class="amp-val" id="ampval-${b.id}">${b.ampDefault}</span>
+    <div class="color-dot">
+      <div class="dot" style="background:${b.color}"></div>
+      <span class="dot-label">${b.label}</span>
+    </div>
+  `;
+  container.appendChild(row);
+
+  document.getElementById(`amp-${b.id}`).addEventListener("input", e => {
+    document.getElementById(`ampval-${b.id}`).textContent = e.target.value;
+  });
+});
+
+document.getElementById("fs-slider").addEventListener("input", e => {
+  document.getElementById("fs-val").textContent = e.target.value + " Hz";
+});
+document.getElementById("dur-slider").addEventListener("input", e => {
+  document.getElementById("dur-val").textContent = e.target.value + " s";
+});
+
+const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+const gC = isDark ? "rgba(255,255,255,.06)" : "rgba(0,0,0,.07)";
+const lC = isDark ? "#666" : "#bbb";
+
+let chartMain = null;
+let chartBands = null;
+let lastSignal = null;
+
+document.getElementById("btn-generate").addEventListener("click", () => {
+  const fs = parseInt(document.getElementById("fs-slider").value);
+  const dur = parseInt(document.getElementById("dur-slider").value);
+  const N = fs * dur;
+  const dt = 1 / fs;
+
+  const activeBands = BANDS.filter(b => document.getElementById(`chk-${b.id}`).checked);
+  if (activeBands.length === 0) {
+    document.getElementById("info-label").textContent = "Select at least one band!";
+    return;
+  }
+
+  const t = Array.from({length: N}, (_, i) => parseFloat((i * dt).toFixed(4)));
+  const composed = new Float64Array(N);
+
+  const bandsData = activeBands.map(b => {
+    const amp = parseFloat(document.getElementById(`amp-${b.id}`).value);
+    const freq = b.freqDefault;
+    const signal = new Float64Array(N);
+    for (let i = 0; i < N; i++) {
+      signal[i] = amp * Math.sin(2 * Math.PI * freq * t[i]);
+      composed[i] += signal[i];
+    }
+    return { ...b, amp, signal };
+  });
+
+  lastSignal = { t, composed, bandsData };
+
+  const stride = Math.max(1, Math.floor(N / 600));
+  const tShow = t.filter((_, i) => i % stride === 0);
+  const compShow = Array.from(composed).filter((_, i) => i % stride === 0);
+
+  if (chartMain) chartMain.destroy();
+  chartMain = new Chart(document.getElementById("chart-main"), {
+    type: "line",
+    data: {
+      labels: tShow.map(v => v.toFixed(2)),
+      datasets: [{
+        label: "Composed EEG",
+        data: compShow.map(v => parseFloat(v.toFixed(2))),
+        borderColor: "#2563c4",
+        borderWidth: 1.2,
+        pointRadius: 0,
+        tension: 0,
+        fill: false
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false, animation: false,
+      plugins: { legend: { display: false }, tooltip: { enabled: false } },
+      scales: {
+        x: {
+          ticks: { color: lC, maxTicksLimit: 10, font: { size: 11, family: "'Courier New',monospace" }, callback: v => v + ' s' },
+          grid: { color: gC },
+          title: { display: true, text: "Time (s)", color: lC, font: { size: 11, family: "'Courier New',monospace" } }
+        },
+        y: {
+          ticks: { color: lC, font: { size: 11, family: "'Courier New',monospace" }, callback: v => v + ' µV', maxTicksLimit: 5 },
+          grid: { color: gC },
+          title: { display: true, text: "Amplitude (µV)", color: lC, font: { size: 11, family: "'Courier New',monospace" } }
+        }
+      }
+    }
+  });
+
+  if (chartBands) chartBands.destroy();
+  chartBands = new Chart(document.getElementById("chart-bands"), {
+    type: "line",
+    data: {
+      labels: tShow.map(v => v.toFixed(2)),
+      datasets: bandsData.map(b => ({
+        label: b.label,
+        data: Array.from(b.signal).filter((_, i) => i % stride === 0).map(v => parseFloat(v.toFixed(2))),
+        borderColor: b.color,
+        borderWidth: 1,
+        pointRadius: 0,
+        tension: 0,
+        fill: false
+      }))
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false, animation: false,
+      plugins: {
+        legend: { display: true, labels: { font: { size: 11, family: "'Courier New',monospace" }, color: lC, boxWidth: 10, padding: 14 } },
+        tooltip: { enabled: false }
+      },
+      scales: {
+        x: { ticks: { color: lC, maxTicksLimit: 10, font: { size: 11, family: "'Courier New',monospace" } }, grid: { color: gC } },
+        y: { ticks: { color: lC, font: { size: 11, family: "'Courier New',monospace" } }, grid: { color: gC } }
+      }
+    }
+  });
+
+  const peak = Math.max(...Array.from(composed).map(Math.abs));
+  const names = activeBands.map(b => b.label).join(" + ");
+
+  document.getElementById("stat-samples").textContent = N.toLocaleString();
+  document.getElementById("stat-bands").textContent = activeBands.length;
+  document.getElementById("stat-peak").textContent = peak.toFixed(1) + " µV";
+  document.getElementById("info-label").innerHTML = `<span>${names}</span> · ${fs} Hz · ${dur} s`;
+  document.getElementById("bands-label").textContent = "Individual contribution of each active band";
+  document.getElementById("btn-download").disabled = false;
+});
+
+document.getElementById("btn-download").addEventListener("click", () => {
+  if (!lastSignal) return;
+  const { t, composed, bandsData } = lastSignal;
+  const headers = ["time_s", "eeg_composed_uV", ...bandsData.map(b => `${b.id}_uV`)];
+  const rows = t.map((tv, i) => [
+    tv.toFixed(6),
+    composed[i].toFixed(4),
+    ...bandsData.map(b => b.signal[i].toFixed(4))
+  ]);
+  const csv = [headers.join(","), ...rows.map(r => r.join(","))].join("\n");
+  const blob = new Blob([csv], { type: "text/csv" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "eeg_signal.csv"; a.click();
+  URL.revokeObjectURL(url);
+});
+
+const lastModified = new Date(document.lastModified);
+
+const formatted = lastModified.toLocaleString('it-IT', {
+  day: '2-digit',
+  month: '2-digit',
+  year: 'numeric',
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit'
+});
+
+document.getElementById("lastModified").textContent = formatted;
+</script>
+</body>
+</html>

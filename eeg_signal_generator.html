@@ -454,7 +454,7 @@ document.getElementById("btn-generate").addEventListener("click", () => {
       plugins: { legend: { display: false }, tooltip: { enabled: false } },
       scales: {
         x: {
-          ticks: { color: lC, maxTicksLimit: 10, font: { size: 11, family: "'Courier New',monospace" }, callback: v => v + ' s' },
+          ticks: { color: lC, maxTicksLimit: 10, font: { size: 11, family: "'Courier New',monospace" } },
           grid: { color: gC },
           title: { display: true, text: "Time (s)", color: lC, font: { size: 11, family: "'Courier New',monospace" } }
         },

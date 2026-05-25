@@ -327,6 +327,7 @@
         <button class="tog on" id="btn-drift1">Drift 1 (0.10 Hz)</button>
         <button class="tog on" id="btn-drift2">Drift 2 (0.25 Hz)</button>
         <button class="tog on" id="btn-drift3">Drift 3 (0.05 Hz)</button>
+        <button class="tog on" id="btn-muscle">EMG / Muscle (>30 Hz)</button>
       </div>
     </div>
 
@@ -397,7 +398,9 @@
   <script>
     const FS = 256, DUR = 15, N = FS * DUR;
     const tArr = Array.from({ length: N }, (_, i) => i / FS);
-    const flags = { delta: true, alpha: true, beta: true, line: true, drift1: true, drift2: true, drift3: true };
+
+    // CHANGE 1: added muscle: true to the flags object
+    const flags = { delta: true, alpha: true, beta: true, line: true, drift1: true, drift2: true, drift3: true, muscle: true };
     let rawSig = [], procSig = [];
 
     // Deterministic pseudo-random generator
@@ -407,13 +410,25 @@
     function genRaw() {
       rawSig = tArr.map(ti => {
         let v = 0;
-        if (flags.delta) v += 90 * Math.sin(2 * Math.PI * 2 * ti + .3) + 50 * Math.sin(2 * Math.PI * 3.5 * ti + 1.1);
-        if (flags.alpha) v += 45 * Math.sin(2 * Math.PI * 10 * ti + 1) + 25 * Math.sin(2 * Math.PI * 12 * ti + 2.2);
-        if (flags.beta) v += 18 * Math.sin(2 * Math.PI * 20 * ti + .5) + 10 * Math.sin(2 * Math.PI * 28 * ti + .9);
-        if (flags.line) v += 8 * Math.sin(2 * Math.PI * 50 * ti) + noise(15);
-        if (flags.drift1) v += 80 * Math.sin(2 * Math.PI * .10 * ti + .2);
-        if (flags.drift2) v += 60 * Math.sin(2 * Math.PI * .25 * ti + 1.5);
+        if (flags.delta)  v += 90 * Math.sin(2 * Math.PI * 2    * ti + .3)  + 50 * Math.sin(2 * Math.PI * 3.5 * ti + 1.1);
+        if (flags.alpha)  v += 45 * Math.sin(2 * Math.PI * 10   * ti + 1)   + 25 * Math.sin(2 * Math.PI * 12  * ti + 2.2);
+        if (flags.beta)   v += 18 * Math.sin(2 * Math.PI * 20   * ti + .5)  + 10 * Math.sin(2 * Math.PI * 28  * ti + .9);
+        if (flags.line)   v += 8  * Math.sin(2 * Math.PI * 50   * ti)       + noise(15);
+        if (flags.drift1) v += 80 * Math.sin(2 * Math.PI * .10  * ti + .2);
+        if (flags.drift2) v += 60 * Math.sin(2 * Math.PI * .25  * ti + 1.5);
         if (flags.drift3) v += 100 * Math.sin(2 * Math.PI * .05 * ti + .8);
+
+        // CHANGE 2: muscle artifact — broadband high-frequency noise (EMG-like, >30 Hz)
+        // Real EMG contaminates EEG above ~30 Hz with random-looking bursts.
+        // We simulate it as broadband random noise plus a few high-frequency sinusoids.
+        if (flags.muscle) v += noise(90) + noise(70) + noise(50)
+                             + 35 * Math.sin(2 * Math.PI * 45  * ti + 0.3)
+                             + 30 * Math.sin(2 * Math.PI * 55  * ti + 0.7)
+                             + 25 * Math.sin(2 * Math.PI * 75  * ti + 1.3)
+                             + 20 * Math.sin(2 * Math.PI * 90  * ti + 2.6)
+                             + 15 * Math.sin(2 * Math.PI * 100 * ti + 0.4)
+                             + 10 * Math.sin(2 * Math.PI * 120 * ti + 2.1);
+
         return v;
       });
     }
@@ -486,7 +501,8 @@
       let s = rawSig.slice();
       if (hp > 0) s = hpFilter(s, hp);
       if (lp < 100) s = lpFilter(s, lp);
-      if (notchOn) s = notchFilter(s);      procSig = s;
+      if (notchOn) s = notchFilter(s);
+      procSig = s;
     }
 
     const STEP = 3;
@@ -600,15 +616,18 @@
       const parts = [];
       if (hp > 0) parts.push('high-pass ' + hp.toFixed(1) + ' Hz');
       if (lp < 100) parts.push('low-pass ' + lp.toFixed(0) + ' Hz');
-      if (notchOn) parts.push('notch 50 Hz');      document.getElementById('proc-desc').textContent = parts.length ? 'Applied: ' + parts.join(' → ') : 'No preprocessing applied yet';
+      if (notchOn) parts.push('notch 50 Hz');
+      document.getElementById('proc-desc').textContent = parts.length ? 'Applied: ' + parts.join(' → ') : 'No preprocessing applied yet';
 
       document.getElementById('hp-v').textContent = hp > 0 ? hp.toFixed(1) + ' Hz' : 'off';
       document.getElementById('lp-v').textContent = lp < 100 ? lp.toFixed(0) + ' Hz' : 'off';
-      document.getElementById('notch-v').textContent = notchOn ? 'on' : 'off';    }
+      document.getElementById('notch-v').textContent = notchOn ? 'on' : 'off';
+    }
 
     ['hp', 'lp', 'notch'].forEach(id => document.getElementById(id).addEventListener('input', updateAll));
 
-    ['delta', 'alpha', 'beta', 'line', 'drift1', 'drift2', 'drift3'].forEach(key => {
+    // CHANGE 3: added 'muscle' to the list of toggle keys
+    ['delta', 'alpha', 'beta', 'line', 'drift1', 'drift2', 'drift3', 'muscle'].forEach(key => {
       document.getElementById('btn-' + key).addEventListener('click', function () {
         flags[key] = !flags[key];
         this.classList.toggle('on', flags[key]);

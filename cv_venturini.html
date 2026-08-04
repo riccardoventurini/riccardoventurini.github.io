@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CV — Riccardo Venturini</title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@300;400&display=swap"
+    rel="stylesheet" />
+
+  <style>
+    :root {
+      --background: #faf8f4;
+      --text: #1a1a18;
+      --accent: #2a5c8f;
+      --gray: #6b6b65;
+      --border: #e0ddd6;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { background: var(--background); }
+
+    body {
+      background: var(--background);
+      color: var(--text);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 1.1rem;
+      line-height: 1.75;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 2rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.85rem;
+    }
+
+    h1 {
+      font-weight: 400;
+      font-size: 2rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .subtitle {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-bottom: 1.5rem;
+    }
+
+    .contacts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 1.2rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.82rem;
+      color: var(--gray);
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .contacts a {
+      color: var(--gray);
+    }
+    .contacts a:hover { color: var(--accent); }
+
+    .section {
+      margin-top: 2.5rem;
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+    }
+
+    .section h2 {
+      font-family: 'DM Mono', monospace;
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 1.3rem;
+    }
+
+    /* Ogni voce (esperienza, titolo di studio, pubblicazione, ecc.) */
+    .entry {
+      margin-bottom: 1.4rem;
+      padding-bottom: 1.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .entry:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .entry .date {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--gray);
+      letter-spacing: 0.03em;
+    }
+
+    .entry .title {
+      font-weight: 600;
+      font-size: 1.05rem;
+      margin-top: 0.15rem;
+    }
+
+    .entry .place {
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--gray);
+      margin-top: 0.1rem;
+    }
+
+    .entry .desc {
+      margin-top: 0.4rem;
+      font-size: 0.98rem;
+      color: #333;
+    }
+
+    .entry .desc a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--gray);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <a class="back" href="index.html">← Back to homepage</a>
+
+    <h1>Riccardo Venturini</h1>
+    <div class="subtitle">Psychologist — PhD Student in Theoretical and Experimental Linguistics</div>
+
+    <!-- ============ CONTACTS ============ -->
+    <div class="contacts">
+      <span>Piazza della Vittoria 15, 27100 Pavia, Italy</span>
+      <a href="mailto:riccardo.venturini@iusspavia.it">riccardo.venturini@iusspavia.it</a>
+      <a href="https://x.com/ric_venturini" target="_blank">@ric_venturini</a>
+      <a href="https://bsky.app/profile/riccardoventurini.bsky.social" target="_blank">@riccardoventurini.bsky.social</a>
+      <a href="https://www.linkedin.com/in/riccardoventurini99/" target="_blank">LinkedIn</a>
+      <a href="https://github.com/riccardoventurini" target="_blank">GitHub</a>
+    </div>
+
+    <!-- ============ EDUCATION ============ -->
+    <div class="section">
+      <h2>Education</h2>
+
+      <div class="entry">
+        <div class="date">OCT 2024 – ONGOING</div>
+        <div class="title">PhD in Theoretical and Experimental Linguistics</div>
+        <div class="place">University School for Advanced Studies IUSS, Pavia (IT)</div>
+        <div class="desc">Research topics: M/EEG data analysis, neurolinguistics, naturalistic speech comprehension. Supervisor: Prof. Valentina Bambini (IUSS Pavia).</div>
+      </div>
+
+      <div class="entry">
+        <div class="date">OCT 2021 – OCT 2023</div>
+        <div class="title">MSc in Psychology (Neuroscience track)</div>
+        <div class="place">University of Trento, Rovereto (IT) — Grade: 110/110 cum laude</div>
+        <div class="desc">Thesis: "Samples from data quality and data reliability assessment and validation of blindTHINGS dataset". Supervisors: Prof. Martin Hebart (MPI CBS), Prof. Roberto Bottini (UniTn).</div>
+      </div>
+
+      <div class="entry">
+        <div class="date">OCT 2018 – JUL 2021</div>
+        <div class="title">BSc in Psychological Science</div>
+        <div class="place">University of Padua, Padua (IT) — Grade: 110/110 cum laude</div>
+        <div class="desc">Thesis: "Genuine and simulated emotions: kinematics of Duchenne Smile symmetry". Supervisor: Prof. Luisa Sartori (UniPd).</div>
+      </div>
+
+      <div class="entry">
+        <div class="date">SEP 2016 – AUG 2018</div>
+        <div class="title">Advanced Level in Maths, Biology, Physics and History</div>
+        <div class="place">Central Foundation Boys' School, London</div>
+      </div>
+
+      <div class="entry">
+        <div class="date">SEP 2013 – JUN 2016</div>
+        <div class="title">Secondary School</div>
+        <div class="place">Liceo Scientifico Statale "Niccolò Copernico", Udine</div>
+      </div>
+    </div>
+
+    <!-- ============ INTERNSHIPS AND TRAINING EXPERIENCE ============ -->
+    <div class="section">
+      <h2>Internships and Training Experience</h2>
+
+      <div class="entry">
+        <div class="date">OCT 2024 – ONGOING</div>
+        <div class="title">PhD student</div>
+        <div class="place">University School for Advanced Studies IUSS, Pavia</div>
+        <div class="desc">Research at NEPLab on the analysis of electrophysiological data to investigate the neural mechanisms underlying language processing, with a particular emphasis on naturalistic speech comprehension. Experience with M/EEG analysis methods, from event-related potentials to multivariate approaches such as time-resolved decoding, as well as functional connectivity analysis. Supervisor: Prof. Valentina Bambini (IUSS Pavia). Co-supervisor: Dott. Federico Frau (IUSS Pavia).</div>
+      </div>
+
+      <div class="entry">
+        <div class="date">OCT 2023 – SEP 2024</div>
+        <div class="title">Postgraduate qualifying internship in Neuropsychology</div>
+        <div class="place">S. Chiara University Hospital, Trento</div>
+        <div class="desc">Neurosurgery Unit: neuropsychological assessment of brain tumour patients, advanced neuroimaging analyses (virtual in vivo dissection and resting state functional connectivity analysis) for awake surgery planning and intraoperative functional mapping. Physical Medicine and Rehabilitation Unit: design and implementation of rehabilitation programs with patients with severe acquired brain injuries. Supervisor: Luca Zigiotto, PsyD (UniTn).</div>
+      </div>
+
+      <div class="entry">
+        <div class="date">SEP 2022 – SEP 2023</div>
+        <div class="title">Graduate curricular internship</div>
+        <div class="place">University of Trento, Rovereto</div>
+        <div class="desc">Neurobiology of Conceptual Knowledge Group: replication study of an experiment investigating unconscious semantic processing. Acquisition of fMRI data on blind participants and sighted controls for the understanding of semantics in sensory deprived participants. Supervisor: Prof. Roberto Bottini (UniTn).</div>
+      </div>
+
+      <div class="entry">
+        <div class="date">APR 2022 – OCT 2022</div>
+        <div class="title">Research internship</div>
+        <div class="place">University of Trento, Rovereto</div>
+        <div class="desc">Affiliative Behaviour and Psychology Laboratory: assessment of the predictability of infant development using data from the UNICEF MICS questionnaire on water quality in low- to middle-income countries using scikit-learn and mics-library. Supervisor: Dott. Andrea Bizzego (UniTn).</div>
+      </div>
+
+      <div class="entry">
+        <div class="date">SEP 2020 – JUL 2021</div>
+        <div class="title">Undergraduate curricular internship</div>
+        <div class="place">University of Padua, Padua</div>
+        <div class="desc">Neuroscience of Movement Laboratory: tridimensional kinetic marking and analysis of elicited or simulated emotions according to the FACS. Supervisor: Prof. Luisa Sartori (UniPd).</div>
+      </div>
+    </div>
+
+    <!-- ============ TRAINING AND VISITING EXPERIENCE ABROAD ============ -->
+    <div class="section">
+      <h2>Training and Visiting Experience Abroad</h2>
+
+      <div class="entry">
+        <div class="date">JAN 2026 – APR 2026</div>
+        <div class="title">Visiting doctoral research period</div>
+        <div class="place">Goethe University Frankfurt, Frankfurt am Main</div>
+        <div class="desc">People's Lab: time-resolved neural decoding of hierarchical linguistic processing during naturalistic speech comprehension from EEG using a back-to-back regression framework. Supervisor: Dr. Alessandro Tavano (GU).</div>
+      </div>
+
+      <div class="entry">
+        <div class="date">JUN 2023 – SEP 2023</div>
+        <div class="title">Erasmus+ Thesis/research Traineeship</div>
+        <div class="place">Max Planck Institute for Human Cognitive and Brain Sciences, Leipzig</div>
+        <div class="desc">Vision and Computational Cognition Group: quality control, quality assessment and validation of a deep-imaging-approach fMRI dataset on blind participants and sighted controls for the understanding of semantics in sensory deprived participants. Supervisor: Prof. Martin Hebart (MPI CBS).</div>
+      </div>
+    </div>
+
+    <!-- ============ SUMMER SCHOOLS AND WORKSHOPS ============ -->
+    <div class="section">
+      <h2>Summer Schools and Workshops</h2>
+
+      <div class="entry">
+        <div class="date">OCT 2025</div>
+        <div class="title">PracticalMEEG</div>
+        <div class="place">Aix-Marseille University, Aix-en-Provence</div>
+        <div class="desc">Intensive theoretical and hands-on training in M/EEG analysis, covering preprocessing, source analysis, and group-level statistics.</div>
+      </div>
+
+      <div class="entry">
+        <div class="date">JUN 2024</div>
+        <div class="title">Connect Brain Vol. III</div>
+        <div class="place">S. Chiara University Hospital, Trento</div>
+        <div class="desc">Theoretical and practical course on clinical and surgical applications of structural and functional connectivity.</div>
+      </div>
+
+      <div class="entry">
+        <div class="date">JUL 2024 – AUG 2024</div>
+        <div class="title">European Summer School in Sensory Neuroscience</div>
+        <div class="place">University of Pisa</div>
+      </div>
+
+      <div class="entry">
+        <div class="date">MAR 2023</div>
+        <div class="title">EBRAINS Workshop</div>
+        <div class="place">Paris Brain Institute</div>
+        <div class="desc">Anatomy and function of the prefrontal cortex across species.</div>
+      </div>
+    </div>
+
+    <!-- ============ PUBLICATIONS ============ -->
+    <div class="section">
+      <h2>Publications</h2>
+
+      <div class="entry">
+        <div class="title">Scientific Articles</div>
+      </div>
+
+      <div class="entry">
+        <div class="desc">Zigiotto, L.<sup>*</sup>, <strong>Venturini, R.<sup>*</sup></strong>, Coletta, L., Venturini, M., Dal Monte, D., Vavassori, L., Corsini, F., Annicchiarico, L., Avesani, P., Papagno, C., Sarubbo, S. (2026) Maximizing Tumor Resection and Managing Cognitive Attentional Outcomes: Measures of Impact of Awake Surgery in Glioma Treatment. <em>Neurosurgery</em>, 10-1227.</div>
+        <div class="desc"><a href="https://doi.org/10.1227/neu.0000000000003591">DOI</a> · <a href="Zigiotto, Venturini et al (2026) - Neurosurgery.pdf">PDF</a></div>
+      </div>
+
+      <div class="entry">
+        <div class="title">Abstracts to Conferences (as presenter)</div>
+      </div>
+
+      <div class="entry">
+        <div class="desc"><strong>Venturini, R.</strong>, Frau, F., Canal, P., Aubonnet, R., Agostoni, G., Arcara, G., Cavallaro, R., Di Lorenzo, G., Bosia, M., Bambini, V. Changes in EEG beta functional connectivity during narrative listening reflect linguistic-pragmatic impairment in schizophrenia. SIPF Annual Congress – "The adaptive brain", Verona (Italy), 17-19 September 2025. [Poster presentation]</div>
+      </div>
+
+      <div class="entry">
+        <div class="desc"><strong>Venturini, R.</strong>, Frau, F., Canal, P., Aubonnet, R., Agostoni, G., Arcara, G., Cavallaro, R., Di Lorenzo, G., Bosia, M., Bambini, V. Changes in EEG beta functional connectivity during narrative listening reflect linguistic-pragmatic impairment in schizophrenia. PracticalMEEG 2025, Aix-en-Provence (France), 27-31 October 2025. [Poster presentation]</div>
+      </div>
+
+      <div class="entry">
+        <div class="title">Abstracts to Conferences (as co-author)</div>
+      </div>
+
+      <div class="entry">
+        <div class="desc">Frau, F., <strong>Venturini, R.</strong>, Canal, P., Aubonnet, R., Agostoni, G., Arcara, G., Cavallaro, R., Di Lorenzo, G., Bosia, M., Bambini, V. Changes in EEG beta functional connectivity during narrative listening reflect linguistic-pragmatic impairment in schizophrenia. SNL 17th Annual Meeting, Washington DC (United States), 12-14 September 2025. [Poster presentation]</div>
+      </div>
+
+      <div class="entry">
+        <div class="desc">Frau, F., Canal, P., Luciani, F., <strong>Venturini, R.</strong>, Bischetti, L., Bambini, V. A key to interpreting late effects in the brain response to metaphors: priming figurative (but not literal) meaning. 11th XPRAG Conference, Cambridge (United Kingdom), 17-19 September 2025. [Oral presentation]</div>
+      </div>
+
+      <div class="entry">
+        <div class="desc">Canal, P., Frau, F., Luciani, F., <strong>Venturini, R.</strong>, Bischetti, L., Bambini, V. A key to interpreting late effects in the brain response to metaphors: priming figurative (but not literal) meaning. 31st AMLaP Conference, Prague (Czechia), 4-6 September 2025. [Poster presentation]</div>
+      </div>
+    </div>
+
+    <!-- ============ HONORS, AWARDS, AND FUNDING ============ -->
+    <div class="section">
+      <h2>Honors, Awards, and Funding</h2>
+
+      <div class="entry">
+        <div class="title">International Mobility Grant (EFC Project)</div>
+        <div class="place">IUSS School for Advanced Studies Pavia</div>
+        <div class="desc">Competitive PNRR-funded (Next Generation EU) grant for research visit at Goethe University Frankfurt (Germany), €1250/month for 4 months.</div>
+      </div>
+    </div>
+
+    <!-- ============ ATTENDED CONFERENCES ============ -->
+    <div class="section">
+      <h2>Attended Conferences</h2>
+
+      <div class="entry">
+        <div class="date">MARCH 2026 | PAVIA</div>
+        <div class="title">Discourse in Psychosis</div>
+        <div class="desc">4th Consortium Satellite Meeting – "Language and thought in the brain and in mental health"</div>
+      </div>
+
+      <div class="entry">
+        <div class="date">FEB 2025 | MILANO</div>
+        <div class="title">ITRN Annual Meeting</div>
+        <div class="desc">4th Italian Reproducibility Network meeting – "Open science and inclusivity"</div>
+      </div>
+
+      <div class="entry">
+        <div class="date">SEP 2024 | VENEZIA</div>
+        <div class="title">XPRAG.it</div>
+        <div class="desc">5th Experimental Pragmatics in Italy Conference</div>
+      </div>
+
+      <div class="entry">
+        <div class="date">MAY 2024 | ROVERETO</div>
+        <div class="title">CIMeC Workshop</div>
+        <div class="desc">Concepts, Actions and Objects: Functional and Neural Perspectives</div>
+      </div>
+
+      <div class="entry">
+        <div class="date">APRIL 2024 | ROVERETO</div>
+        <div class="title">SIPO Interregional Conference</div>
+        <div class="desc">Communication in psycho-oncology</div>
+      </div>
+
+      <div class="entry">
+        <div class="date">MAY 2023 | ROVERETO</div>
+        <div class="title">CIMeC Workshop</div>
+        <div class="desc">Concepts, Actions and Objects: Functional and Neural Perspectives</div>
+      </div>
+
+      <div class="entry">
+        <div class="date">MAY 2022 | FIRENZE</div>
+        <div class="title">ITRN Annual Meeting</div>
+        <div class="desc">1st Italian Reproducibility Network meeting – "Trying and trying again"</div>
+      </div>
+    </div>
+
+    <!-- ============ PARTICIPATION TO RESEARCH ACTIVITIES ============ -->
+    <div class="section">
+      <h2>Participation to Research Activities</h2>
+
+      <div class="entry">
+        <div class="date">OCT 2024 – ONGOING</div>
+        <div class="title">PROcessing MEtaphors: Neurochronometry, Acquisition and Decay (PROMENADE)</div>
+        <div class="place">University School for Advanced Studies IUSS, Pavia</div>
+        <div class="desc">ERC Consolidator Grant, project number 101045733. Funded by the European Research Council (ERC). PI: Prof. Valentina Bambini.</div>
+      </div>
+
+      <div class="entry">
+        <div class="date">OCT 2024 – ONGOING</div>
+        <div class="title">The Fragility of Metaphors (FraMe): learning, loosing, and how to train them</div>
+        <div class="place">University School for Advanced Studies IUSS, Pavia</div>
+        <div class="desc">PRIN (Progetti di Ricerca di Rilevante Interesse Nazionale), project number 2022289RNA. Funded by the Italian Ministry of Research. PI: Prof. Valentina Bambini.</div>
+      </div>
+
+      <div class="entry">
+        <div class="date">OCT 2023 – SEP 2024</div>
+        <div class="title">NeuSurPlan: an integrated approach to neurosurgery planning based on multimodal data</div>
+        <div class="place">Ospedale Santa Chiara, Trento — Neurosurgery Unit</div>
+        <div class="desc">Funded by the Autonomous Province of Trento. PI: Prof. Silvio Sarubbo.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    © Riccardo Venturini — Last updated <span id="lastModified"></span>
+  </footer>
+
+  <script>
+    const lastModified = new Date(document.lastModified);
+
+    const formatted = lastModified.toLocaleString('it-IT', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    });
+
+    document.getElementById("lastModified").textContent = formatted;
+  </script>
+
+</body>
+</html>

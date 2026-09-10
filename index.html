@@ -9,9 +9,10 @@
     :root {
       --background: #ffffff;
       --text: #1a1a1a;
-      --text-muted: #5c5c5c;
-      --accent: #274b6d;
-      --border: #dcdcdc;
+      --text-muted: #6b6b6b;
+      --accent: #3b6ea5;
+      --border: #d6d6d6;
+      --sidebar-bg: #fbfbfb;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -21,21 +22,20 @@
       color: var(--text);
       font-family: Helvetica, Arial, sans-serif;
       font-size: 16px;
-      line-height: 1.65;
+      line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
 
     a {
       color: var(--accent);
-      text-decoration: underline;
-      text-underline-offset: 2px;
+      text-decoration: none;
     }
-    a:hover { color: var(--text); }
+    a:hover { text-decoration: underline; }
 
-    /* ---------- Nav ---------- */
+    /* ---------- Top nav (masthead) ---------- */
     nav {
       border-bottom: 1px solid var(--border);
-      padding: 1.1rem 2rem;
+      padding: 1rem 2.5rem;
       display: flex;
       gap: 2rem;
       align-items: baseline;
@@ -46,15 +46,16 @@
     }
 
     nav .name {
-      font-size: 1.05rem;
+      font-size: 1rem;
       font-weight: 700;
       color: var(--text);
       text-decoration: none;
       margin-right: auto;
+      letter-spacing: 0.01em;
     }
 
     nav a.nav-main {
-      font-size: 0.92rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
       text-decoration: none;
     }
@@ -62,93 +63,125 @@
 
     /* ---------- Layout ---------- */
     .container {
-      max-width: 880px;
+      max-width: 1040px;
       margin: 0 auto;
-      padding: 3.5rem 2rem;
+      padding: 2.5rem 2.5rem 4rem;
       display: grid;
-      grid-template-columns: 200px 1fr;
-      gap: 3.5rem;
+      grid-template-columns: 260px 1fr;
+      gap: 3rem;
       align-items: start;
     }
 
+    /* ---------- Sidebar (author box) ---------- */
     .sidebar {
-      text-align: left;
+      border: 1px solid var(--border);
+      background: var(--sidebar-bg);
+      padding: 1.5rem;
+      text-align: center;
     }
 
     .sidebar img {
-      width: 150px;
-      height: 150px;
-      border-radius: 4px;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
       object-fit: cover;
       border: 1px solid var(--border);
-      margin-bottom: 1.1rem;
-      background: #f2f2f2;
+      margin: 0 auto 1rem;
+      background: #eee;
       display: block;
     }
 
     .sidebar h2 {
       font-size: 1.05rem;
       font-weight: 700;
-      margin-bottom: 0.15rem;
+      margin-bottom: 0.2rem;
     }
 
     .sidebar .affiliation {
-      font-size: 0.92rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
-      margin-bottom: 1.2rem;
+      font-style: italic;
+      margin-bottom: 1.1rem;
     }
 
-    .social {
-      display: flex;
-      flex-direction: column;
-      gap: 0.35rem;
-      font-size: 0.88rem;
+    .follow-btn {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text);
+      background: #f0f0f0;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 0.35rem 0.9rem;
+      cursor: pointer;
+      margin-bottom: 1rem;
     }
+    .follow-btn:hover { background: #e6e6e6; }
+
+    .social {
+      display: none;
+      flex-direction: column;
+      gap: 0.5rem;
+      font-size: 0.82rem;
+      text-align: left;
+      border-top: 1px solid var(--border);
+      padding-top: 1rem;
+    }
+    .social.open { display: flex; }
 
     .social a {
       color: var(--text-muted);
-      text-decoration: none;
     }
     .social a:hover { color: var(--accent); text-decoration: underline; }
 
-    /* ---------- Main ---------- */
+    .social .icon {
+      display: inline-block;
+      width: 1.1rem;
+      color: var(--text-muted);
+    }
+
+    /* ---------- Main content ---------- */
     .main h1 {
-      font-size: 1.65rem;
+      font-size: 1.6rem;
       font-weight: 700;
-      margin-bottom: 1.4rem;
+      margin-bottom: 1.3rem;
       line-height: 1.35;
       color: var(--text);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.7rem;
     }
 
     .main p {
       margin-bottom: 1.1rem;
-      max-width: 62ch;
+      max-width: 68ch;
       color: var(--text);
     }
 
     .section {
-      margin-top: 2.8rem;
-      border-top: 1px solid var(--border);
-      padding-top: 1.8rem;
+      margin-top: 2.6rem;
     }
 
     .section h2 {
-      font-size: 0.85rem;
+      font-size: 1rem;
       font-weight: 700;
-      color: var(--text-muted);
-      margin-bottom: 1.3rem;
+      color: var(--text);
+      margin-bottom: 1.2rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.5rem;
     }
 
     .info-block {
-      margin-bottom: 1.6rem;
+      margin-bottom: 1.5rem;
     }
 
     .info-block strong {
       display: block;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
       color: var(--text-muted);
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.5rem;
     }
 
     .info-block ul {
@@ -157,7 +190,7 @@
 
     .info-block li {
       margin-bottom: 0.3rem;
-      max-width: 62ch;
+      max-width: 68ch;
     }
 
     .work {
@@ -176,24 +209,24 @@
       font-weight: 700;
       font-size: 1rem;
       margin-bottom: 0.3rem;
-      max-width: 62ch;
+      max-width: 68ch;
     }
 
     .work .authors {
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       color: var(--text-muted);
       margin-bottom: 0.2rem;
-      max-width: 62ch;
+      max-width: 68ch;
     }
 
     .work .journal {
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       color: var(--text-muted);
     }
 
     .work .links {
       margin-top: 0.5rem;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       display: flex;
       gap: 1.2rem;
     }
@@ -211,7 +244,7 @@
         grid-template-columns: 1fr;
         gap: 2rem;
       }
-      .sidebar img { width: 110px; height: 110px; }
+      .sidebar img { width: 100px; height: 100px; }
     }
   </style>
 </head>
@@ -233,12 +266,14 @@
       <h2>Riccardo Venturini, MSc</h2>
       <div class="affiliation">IUSS Pavia</div>
 
-      <div class="social">
-        <a href="mailto:riccardo.venturini@iusspavia.it">Email</a>
-        <a href="https://x.com/ric_venturini" target="_blank">Twitter</a>
-        <a href="https://bsky.app/profile/riccardoventurini.bsky.social" target="_blank">Bluesky</a>
-        <a href="https://www.linkedin.com/in/riccardoventurini99/" target="_blank">LinkedIn</a>
-        <a href="https://github.com/riccardoventurini" target="_blank">GitHub</a>
+      <button class="follow-btn" id="followBtn">Follow</button>
+
+      <div class="social" id="socialList">
+        <a href="mailto:riccardo.venturini@iusspavia.it"><span class="icon">&#9993;</span>Email</a>
+        <a href="https://x.com/ric_venturini" target="_blank"><span class="icon">&#120143;</span>Twitter</a>
+        <a href="https://bsky.app/profile/riccardoventurini.bsky.social" target="_blank"><span class="icon">&#9729;</span>Bluesky</a>
+        <a href="https://www.linkedin.com/in/riccardoventurini99/" target="_blank"><span class="icon">in</span>LinkedIn</a>
+        <a href="https://github.com/riccardoventurini" target="_blank"><span class="icon">&#9679;</span>GitHub</a>
       </div>
     </aside>
 
@@ -309,6 +344,11 @@
     });
 
     document.getElementById("lastModified").textContent = formatted;
+
+    // Toggle the social links list when the "Follow" button is clicked
+    document.getElementById("followBtn").addEventListener("click", function () {
+      document.getElementById("socialList").classList.toggle("open");
+    });
   </script>
 
 </body>

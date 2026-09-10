@@ -104,22 +104,8 @@
       margin-bottom: 1.1rem;
     }
 
-    .follow-btn {
-      display: inline-block;
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: var(--text);
-      background: #f0f0f0;
-      border: 1px solid var(--border);
-      border-radius: 3px;
-      padding: 0.35rem 0.9rem;
-      cursor: pointer;
-      margin-bottom: 1rem;
-    }
-    .follow-btn:hover { background: #e6e6e6; }
-
     .social {
-      display: none;
+      display: flex;
       flex-direction: column;
       gap: 0.5rem;
       font-size: 0.82rem;
@@ -127,7 +113,6 @@
       border-top: 1px solid var(--border);
       padding-top: 1rem;
     }
-    .social.open { display: flex; }
 
     .social a {
       color: var(--text-muted);
@@ -180,7 +165,7 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.04em;
-      color: var(--text-muted);
+      color: var(--text);
       margin-bottom: 0.5rem;
     }
 
@@ -266,9 +251,7 @@
       <h2>Riccardo Venturini, MSc</h2>
       <div class="affiliation">IUSS Pavia</div>
 
-      <button class="follow-btn" id="followBtn">Follow</button>
-
-      <div class="social" id="socialList">
+      <div class="social open" id="socialList">
         <a href="mailto:riccardo.venturini@iusspavia.it"><span class="icon">&#9993;</span>Email</a>
         <a href="https://x.com/ric_venturini" target="_blank"><span class="icon">&#120143;</span>Twitter</a>
         <a href="https://bsky.app/profile/riccardoventurini.bsky.social" target="_blank"><span class="icon">&#9729;</span>Bluesky</a>
@@ -344,11 +327,6 @@
     });
 
     document.getElementById("lastModified").textContent = formatted;
-
-    // Toggle the social links list when the "Follow" button is clicked
-    document.getElementById("followBtn").addEventListener("click", function () {
-      document.getElementById("socialList").classList.toggle("open");
-    });
   </script>
 
 </body>

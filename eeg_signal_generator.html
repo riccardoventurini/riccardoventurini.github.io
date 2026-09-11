@@ -5,27 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EEG Signal Generator</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg: #faf8f4;
+    --bg: #ffffff;
     --surface: #ffffff;
-    --surface2: #f0ede8;
-    --border: rgba(0,0,0,0.1);
-    --text: #1a1a18;
-    --text2: #6b6a66;
-    --text3: #a09f9b;
-    --blue: #2563c4;
-    --blue-bg: #e8f0fd;
-    --blue-text: #1a3a7a;
+    --surface2: #f2f2f2;
+    --border: #d6d6d6;
+    --text: #1a1a1a;
+    --text2: #6b6b6b;
+    --text3: #9a9a9a;
+    --blue: #3b6ea5;
+    --blue-bg: #eaf1f7;
+    --blue-text: #274b6d;
     --radius: 8px;
-    --radius-lg: 12px;
+    --radius-lg: 10px;
   }
 
   body {
-    font-family: 'Georgia', serif;
+    font-family: Helvetica, Arial, sans-serif;
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
@@ -37,12 +36,11 @@
   .back {
     display: inline-block;
     margin-bottom: 2rem;
-    font-family: 'DM Mono', monospace;
     font-size: 0.85rem;
-    color: #2a5c8f;
+    color: var(--text2);
     text-decoration: none;
   }
-  .back:hover { text-decoration: underline; }
+  .back:hover { color: var(--blue); text-decoration: underline; }
 
   header {
     margin-bottom: 2rem;
@@ -50,16 +48,14 @@
     border-bottom: 1px solid var(--border);
   }
   header h1 {
-    font-size: 1.6rem;
-    font-weight: normal;
-    letter-spacing: -0.02em;
+    font-size: 1.5rem;
+    font-weight: 700;
     color: var(--text);
   }
   header p {
-    font-size: 0.875rem;
+    font-size: 0.85rem;
     color: var(--text2);
     margin-top: 4px;
-    font-family: 'Courier New', monospace;
   }
 
   .card {
@@ -71,16 +67,15 @@
   }
 
   .section-title {
-    font-size: 0.68rem;
-    font-weight: bold;
-    letter-spacing: 0.1em;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--text3);
-    font-family: 'Courier New', monospace;
     margin-bottom: 0.75rem;
   }
 
-  /* Slider globale */
+  /* Global slider */
   input[type=range] {
     flex: 1;
     -webkit-appearance: none;
@@ -106,7 +101,7 @@
     box-shadow: 0 0 0 1px var(--blue);
   }
 
-  /* Controlli parametri globali */
+  /* Global parameter controls */
   .ctrl-row {
     display: flex;
     align-items: center;
@@ -114,17 +109,15 @@
     margin-bottom: 10px;
   }
   .ctrl-label {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     color: var(--text2);
     min-width: 200px;
-    font-family: 'Courier New', monospace;
   }
   .ctrl-val {
-    font-size: 0.8rem;
-    font-weight: bold;
+    font-size: 0.85rem;
+    font-weight: 700;
     min-width: 60px;
     text-align: right;
-    font-family: 'Courier New', monospace;
     color: var(--text);
   }
 
@@ -143,19 +136,17 @@
   .stat .sl {
     font-size: 0.7rem;
     color: var(--text3);
-    font-family: 'Courier New', monospace;
     text-transform: uppercase;
     letter-spacing: 0.06em;
     margin-bottom: 4px;
   }
   .stat .sv {
     font-size: 1.35rem;
-    font-weight: normal;
+    font-weight: 700;
     color: var(--text);
-    letter-spacing: -0.02em;
   }
 
-  /* Tabella bande */
+  /* Band table */
   .bands-header, .band-row {
     display: grid;
     grid-template-columns: 20px 70px 70px 1fr 50px 100px;
@@ -168,13 +159,12 @@
     padding-bottom: 8px;
     margin-bottom: 2px;
   }
-  .band-row { border-top: 1px solid rgba(0,0,0,0.05); }
+  .band-row { border-top: 1px solid #ececec; }
   .col-header {
-    font-size: 0.65rem;
+    font-size: 0.68rem;
     color: var(--text3);
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    font-family: 'Courier New', monospace;
   }
   .band-row input[type=checkbox] {
     width: 15px; height: 15px;
@@ -182,20 +172,17 @@
     cursor: pointer;
   }
   .band-row label {
-    font-size: 0.8rem;
-    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
     color: var(--text);
     cursor: pointer;
   }
   .band-sub {
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     color: var(--text3);
-    font-family: 'Courier New', monospace;
   }
   .amp-val {
-    font-size: 0.8rem;
-    font-weight: bold;
-    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
     text-align: right;
     color: var(--text);
   }
@@ -205,9 +192,9 @@
     gap: 6px;
   }
   .dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
-  .dot-label { font-size: 0.7rem; color: var(--text3); font-family: 'Courier New', monospace; }
+  .dot-label { font-size: 0.72rem; color: var(--text3); }
 
-  /* Pulsanti azione */
+  /* Action buttons */
   .btn-row { display: flex; gap: 10px; margin-bottom: 1.25rem; }
 
   button.action {
@@ -215,8 +202,7 @@
     background: var(--surface);
     border-radius: var(--radius);
     padding: 8px 18px;
-    font-size: 0.8rem;
-    font-family: 'DM Mono', monospace;
+    font-size: 0.82rem;
     cursor: pointer;
     color: var(--text);
     transition: background 0.15s, border-color 0.15s;
@@ -231,17 +217,16 @@
     background: var(--blue-bg);
     color: var(--blue-text);
     border-color: transparent;
-    font-weight: bold;
+    font-weight: 700;
   }
-  button.action.primary:hover { background: #d0e2fb; }
+  button.action.primary:hover { background: #d9e6f0; }
 
   /* Chart */
   .chart-wrap { position: relative; width: 100%; height: 170px; }
   .chart-wrap-sm { position: relative; width: 100%; height: 140px; margin-top: 14px; }
   .chart-label {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     color: var(--text3);
-    font-family: 'Courier New', monospace;
     margin-top: 4px;
   }
   .chart-label span { color: var(--blue); }
@@ -253,37 +238,21 @@
     margin-top: 2rem;
     padding: 1.5rem 0;
     text-align: center;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
+    font-size: 0.78rem;
     color: var(--text2);
   }
-  footer a { color: #2a5c8f; text-decoration: none; }
+  footer a { color: var(--blue); text-decoration: none; }
   footer a:hover { text-decoration: underline; }
-
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #141412;
-      --surface: #1e1d1b;
-      --surface2: #252420;
-      --border: rgba(255,255,255,0.1);
-      --text: #f0ede8;
-      --text2: #9a9993;
-      --text3: #5a5955;
-      --blue: #5b8ef0;
-      --blue-bg: #1a2640;
-      --blue-text: #a0bef8;
-    }
-  }
 </style>
 </head>
 <body>
 <div class="container">
 
-  <a class="back" href="materials.html">← Back to materials</a>
+  <a class="back" href="materials.html">&larr; Back to materials</a>
 
   <header>
     <h1>EEG Signal Generator</h1>
-    <p>synthetic signal · selectable bands · CSV export</p>
+    <p>synthetic signal &middot; selectable bands &middot; CSV export</p>
   </header>
 
   <div class="card">
@@ -357,11 +326,11 @@
 
 <script>
 const BANDS = [
-  { id: "delta", label: "Delta", sub: "< 4 Hz",   freqDefault: 2,  ampDefault: 50, color: "#534AB7", enabled: true  },
-  { id: "theta", label: "Theta", sub: "4–8 Hz",   freqDefault: 6,  ampDefault: 30, color: "#0F6E56", enabled: false },
-  { id: "alpha", label: "Alpha", sub: "8–13 Hz",  freqDefault: 10, ampDefault: 40, color: "#D85A30", enabled: true  },
-  { id: "beta",  label: "Beta",  sub: "13–30 Hz", freqDefault: 20, ampDefault: 20, color: "#993556", enabled: false },
-  { id: "gamma", label: "Gamma", sub: "> 30 Hz",  freqDefault: 40, ampDefault: 10, color: "#185FA5", enabled: false },
+  { id: "delta", label: "Delta", sub: "< 4 Hz",   freqDefault: 2,  ampDefault: 50, color: "#3b6ea5", enabled: true  },
+  { id: "theta", label: "Theta", sub: "4–8 Hz",   freqDefault: 6,  ampDefault: 30, color: "#2f7d5c", enabled: false },
+  { id: "alpha", label: "Alpha", sub: "8–13 Hz",  freqDefault: 10, ampDefault: 40, color: "#a5622f", enabled: true  },
+  { id: "beta",  label: "Beta",  sub: "13–30 Hz", freqDefault: 20, ampDefault: 20, color: "#7d3b6e", enabled: false },
+  { id: "gamma", label: "Gamma", sub: "> 30 Hz",  freqDefault: 40, ampDefault: 10, color: "#555555", enabled: false },
 ];
 
 const container = document.getElementById("bands-container");
@@ -394,9 +363,9 @@ document.getElementById("dur-slider").addEventListener("input", e => {
   document.getElementById("dur-val").textContent = e.target.value + " s";
 });
 
-const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-const gC = isDark ? "rgba(255,255,255,.06)" : "rgba(0,0,0,.07)";
-const lC = isDark ? "#666" : "#bbb";
+// Fixed light theme, matching the rest of the site
+const gC = "rgba(0,0,0,.08)";
+const lC = "#9a9a9a";
 
 let chartMain = null;
 let chartBands = null;
@@ -442,7 +411,7 @@ document.getElementById("btn-generate").addEventListener("click", () => {
       datasets: [{
         label: "Composed EEG",
         data: compShow.map(v => parseFloat(v.toFixed(2))),
-        borderColor: "#2563c4",
+        borderColor: "#3b6ea5",
         borderWidth: 1.2,
         pointRadius: 0,
         tension: 0,
@@ -454,14 +423,14 @@ document.getElementById("btn-generate").addEventListener("click", () => {
       plugins: { legend: { display: false }, tooltip: { enabled: false } },
       scales: {
         x: {
-          ticks: { color: lC, maxTicksLimit: 10, font: { size: 11, family: "'Courier New',monospace" } },
+          ticks: { color: lC, maxTicksLimit: 10, font: { size: 11, family: 'Helvetica, Arial, sans-serif' } },
           grid: { color: gC },
-          title: { display: true, text: "Time (s)", color: lC, font: { size: 11, family: "'Courier New',monospace" } }
+          title: { display: true, text: "Time (s)", color: lC, font: { size: 11, family: 'Helvetica, Arial, sans-serif' } }
         },
         y: {
-          ticks: { color: lC, font: { size: 11, family: "'Courier New',monospace" }, callback: v => v + ' µV', maxTicksLimit: 5 },
+          ticks: { color: lC, font: { size: 11, family: 'Helvetica, Arial, sans-serif' }, callback: v => v + ' µV', maxTicksLimit: 5 },
           grid: { color: gC },
-          title: { display: true, text: "Amplitude (µV)", color: lC, font: { size: 11, family: "'Courier New',monospace" } }
+          title: { display: true, text: "Amplitude (µV)", color: lC, font: { size: 11, family: 'Helvetica, Arial, sans-serif' } }
         }
       }
     }
@@ -485,12 +454,12 @@ document.getElementById("btn-generate").addEventListener("click", () => {
     options: {
       responsive: true, maintainAspectRatio: false, animation: false,
       plugins: {
-        legend: { display: true, labels: { font: { size: 11, family: "'Courier New',monospace" }, color: lC, boxWidth: 10, padding: 14 } },
+        legend: { display: true, labels: { font: { size: 11, family: 'Helvetica, Arial, sans-serif' }, color: lC, boxWidth: 10, padding: 14 } },
         tooltip: { enabled: false }
       },
       scales: {
-        x: { ticks: { color: lC, maxTicksLimit: 10, font: { size: 11, family: "'Courier New',monospace" } }, grid: { color: gC } },
-        y: { ticks: { color: lC, font: { size: 11, family: "'Courier New',monospace" } }, grid: { color: gC } }
+        x: { ticks: { color: lC, maxTicksLimit: 10, font: { size: 11, family: 'Helvetica, Arial, sans-serif' } }, grid: { color: gC } },
+        y: { ticks: { color: lC, font: { size: 11, family: 'Helvetica, Arial, sans-serif' } }, grid: { color: gC } }
       }
     }
   });

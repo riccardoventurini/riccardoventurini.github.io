@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EEG Preprocessing Playground</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
   <style>
     *,
     *::before,
@@ -17,25 +16,25 @@
     }
 
     :root {
-      --bg: #faf8f4;
+      --bg: #ffffff;
       --surface: #ffffff;
-      --surface2: #f0ede8;
-      --border: rgba(0, 0, 0, 0.1);
-      --text: #1a1a18;
-      --text2: #6b6a66;
-      --text3: #a09f9b;
-      --blue: #2563c4;
-      --blue-bg: #e8f0fd;
-      --blue-text: #1a3a7a;
-      --teal: #0f7a5a;
-      --teal-bg: #e0f5ee;
-      --teal-text: #084433;
+      --surface2: #f2f2f2;
+      --border: #d6d6d6;
+      --text: #1a1a1a;
+      --text2: #6b6b6b;
+      --text3: #9a9a9a;
+      --blue: #3b6ea5;
+      --blue-bg: #eaf1f7;
+      --blue-text: #274b6d;
+      --teal: #2f7d5c;
+      --teal-bg: #e8f5ef;
+      --teal-text: #1f5c42;
       --radius: 8px;
-      --radius-lg: 12px;
+      --radius-lg: 10px;
     }
 
     body {
-      font-family: 'Georgia', serif;
+      font-family: Helvetica, Arial, sans-serif;
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
@@ -50,13 +49,12 @@
     .back {
       display: inline-block;
       margin-bottom: 2rem;
-      font-family: 'DM Mono', monospace;
       font-size: 0.85rem;
-      color: #2a5c8f;
+      color: var(--text2);
       text-decoration: none;
     }
 
-    .back:hover { text-decoration: underline; }
+    .back:hover { color: var(--blue); text-decoration: underline; }
 
     header {
       margin-bottom: 2rem;
@@ -65,17 +63,15 @@
     }
 
     header h1 {
-      font-size: 1.6rem;
-      font-weight: normal;
-      letter-spacing: -0.02em;
+      font-size: 1.5rem;
+      font-weight: 700;
       color: var(--text);
     }
 
     header p {
-      font-size: 0.875rem;
+      font-size: 0.85rem;
       color: var(--text2);
       margin-top: 4px;
-      font-family: 'Courier New', monospace;
     }
 
     .card {
@@ -87,12 +83,11 @@
     }
 
     .section-title {
-      font-size: 0.68rem;
-      font-weight: bold;
-      letter-spacing: 0.1em;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--text3);
-      font-family: 'Courier New', monospace;
       margin-bottom: 0.75rem;
     }
 
@@ -103,8 +98,7 @@
     }
 
     .tog {
-      font-size: 0.75rem;
-      font-family: 'Courier New', monospace;
+      font-size: 0.78rem;
       padding: 4px 10px;
       border-radius: 99px;
       border: 1px solid var(--border);
@@ -123,7 +117,7 @@
       background: var(--blue-bg);
       color: var(--blue-text);
       border-color: transparent;
-      font-weight: bold;
+      font-weight: 700;
     }
 
     .ctrl-row {
@@ -134,18 +128,16 @@
     }
 
     .ctrl-label {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       color: var(--text2);
       min-width: 160px;
-      font-family: 'Courier New', monospace;
     }
 
     .ctrl-val {
-      font-size: 0.8rem;
-      font-weight: bold;
+      font-size: 0.85rem;
+      font-weight: 700;
       min-width: 60px;
       text-align: right;
-      font-family: 'Courier New', monospace;
       color: var(--text);
     }
 
@@ -194,7 +186,6 @@
     .stat .sl {
       font-size: 0.7rem;
       color: var(--text3);
-      font-family: 'Courier New', monospace;
       text-transform: uppercase;
       letter-spacing: 0.06em;
       margin-bottom: 4px;
@@ -202,15 +193,13 @@
 
     .stat .sv {
       font-size: 1.35rem;
-      font-weight: normal;
+      font-weight: 700;
       color: var(--text);
-      letter-spacing: -0.02em;
     }
 
     .chart-label {
-      font-size: 0.7rem;
+      font-size: 0.75rem;
       color: var(--text3);
-      font-family: 'Courier New', monospace;
       margin-top: 3px;
       margin-bottom: 1rem;
     }
@@ -238,9 +227,8 @@
     }
 
     .legend span {
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       color: var(--text2);
-      font-family: 'Courier New', monospace;
       display: flex;
       align-items: center;
       gap: 6px;
@@ -253,16 +241,15 @@
     }
 
     .leg-dashed {
-      background: repeating-linear-gradient(90deg, #0f7a5a 0, #0f7a5a 5px, transparent 5px, transparent 9px);
+      background: repeating-linear-gradient(90deg, #2f7d5c 0, #2f7d5c 5px, transparent 5px, transparent 9px);
     }
 
     .band-row {
       display: flex;
       margin-top: 4px;
       border-top: 1px solid var(--border);
-      font-size: 0.65rem;
+      font-size: 0.7rem;
       color: var(--text3);
-      font-family: 'Courier New', monospace;
     }
 
     .band-cell {
@@ -282,27 +269,8 @@
       margin-top: 2rem;
       padding: 1.5rem 0;
       text-align: center;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       color: var(--text2);
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #141412;
-        --surface: #1e1d1b;
-        --surface2: #252420;
-        --border: rgba(255, 255, 255, 0.1);
-        --text: #f0ede8;
-        --text2: #9a9993;
-        --text3: #5a5955;
-        --blue: #5b8ef0;
-        --blue-bg: #1a2640;
-        --blue-text: #a0bef8;
-        --teal: #2db88a;
-        --teal-bg: #0a2820;
-        --teal-text: #7dd4b4;
-      }
     }
   </style>
 </head>
@@ -310,24 +278,24 @@
 <body>
   <div class="container">
 
-    <a class="back" href="materials.html">← Back to materials</a>
+    <a class="back" href="materials.html">&larr; Back to materials</a>
 
     <header>
       <h1>EEG Preprocessing Playground</h1>
-      <p>simulated signal · interactive filters · power spectral density</p>
+      <p>simulated signal &middot; interactive filters &middot; power spectral density</p>
     </header>
 
     <div class="card">
       <p class="section-title">Signal composition</p>
       <div class="tog-row">
-        <button class="tog on" id="btn-delta">δ Delta (1–4 Hz)</button>
-        <button class="tog on" id="btn-alpha">α Alpha (8–13 Hz)</button>
-        <button class="tog on" id="btn-beta">β Beta (13–30 Hz)</button>
+        <button class="tog on" id="btn-delta">&delta; Delta (1–4 Hz)</button>
+        <button class="tog on" id="btn-alpha">&alpha; Alpha (8–13 Hz)</button>
+        <button class="tog on" id="btn-beta">&beta; Beta (13–30 Hz)</button>
         <button class="tog on" id="btn-line">Line noise (50 Hz)</button>
         <button class="tog on" id="btn-drift1">Drift 1 (0.10 Hz)</button>
         <button class="tog on" id="btn-drift2">Drift 2 (0.25 Hz)</button>
         <button class="tog on" id="btn-drift3">Drift 3 (0.05 Hz)</button>
-        <button class="tog on" id="btn-muscle">EMG / Muscle (>30 Hz)</button>
+        <button class="tog on" id="btn-muscle">EMG / Muscle (&gt;30 Hz)</button>
       </div>
     </div>
 
@@ -368,7 +336,7 @@
     <div class="card">
       <p class="section-title">Time domain — raw signal</p>
       <div class="chart-wrap"><canvas id="raw-chart"></canvas></div>
-      <p class="chart-label">All components combined · before preprocessing</p>
+      <p class="chart-label">All components combined &middot; before preprocessing</p>
 
       <hr>
 
@@ -380,16 +348,16 @@
     <div class="card">
       <p class="section-title">Power spectral density</p>
       <div class="legend">
-        <span><span class="leg-line" style="background:#2563c4"></span>Raw</span>
+        <span><span class="leg-line" style="background:#3b6ea5"></span>Raw</span>
         <span><span class="leg-line leg-dashed"></span>Processed</span>
       </div>
       <div class="psd-wrap"><canvas id="psd-chart"></canvas></div>
       <div class="band-row">
-        <span class="band-cell" style="width:6.67%">δ 0–4</span>
-        <span class="band-cell" style="width:6.67%">θ 4–8</span>
-        <span class="band-cell" style="width:8.33%">α 8–13</span>
-        <span class="band-cell" style="width:28.33%">β 13–30</span>
-        <span class="band-cell" style="flex:1">γ / high 30–60 Hz</span>
+        <span class="band-cell" style="width:6.67%">&delta; 0–4</span>
+        <span class="band-cell" style="width:6.67%">&theta; 4–8</span>
+        <span class="band-cell" style="width:8.33%">&alpha; 8–13</span>
+        <span class="band-cell" style="width:28.33%">&beta; 13–30</span>
+        <span class="band-cell" style="flex:1">&gamma; / high 30–60 Hz</span>
       </div>
     </div>
 
@@ -512,11 +480,11 @@
       return p;
     }
 
-    const isDark = window.matchMedia('(prefers-color-scheme:dark)').matches;
-    const gC = isDark ? 'rgba(255,255,255,.06)' : 'rgba(0,0,0,.07)';
-    const lC = isDark ? '#666' : '#bbb';
-    const RAW_COL = '#2563c4';
-    const PROC_COL = '#0f7a5a';
+    // Fixed light theme, matching the rest of the site
+    const gC = 'rgba(0,0,0,.08)';
+    const lC = '#9a9a9a';
+    const RAW_COL = '#3b6ea5';
+    const PROC_COL = '#2f7d5c';
 
     function makeTimeChart(id, color) {
       return new Chart(document.getElementById(id), {
@@ -528,12 +496,12 @@
           scales: {
             x: {
               type: 'linear', min: 0, max: DUR,
-              ticks: { color: lC, font: { size: 11, family: "'Courier New',monospace" }, callback: v => v.toFixed(0) + 's', maxTicksLimit: 16 },
+              ticks: { color: lC, font: { size: 11, family: 'Helvetica, Arial, sans-serif' }, callback: v => v.toFixed(0) + 's', maxTicksLimit: 16 },
               grid: { color: gC }
             },
             y: {
               min: 0, max: 1,
-              ticks: { color: lC, font: { size: 11, family: "'Courier New',monospace" }, callback: v => v.toFixed(0) + ' µV', maxTicksLimit: 5 },
+              ticks: { color: lC, font: { size: 11, family: 'Helvetica, Arial, sans-serif' }, callback: v => v.toFixed(0) + ' µV', maxTicksLimit: 5 },
               grid: { color: gC }
             }
           }
@@ -572,14 +540,14 @@
         scales: {
           x: {
             type: 'linear', min: 0, max: MAX_F,
-            ticks: { color: lC, font: { size: 11, family: "'Courier New',monospace" }, callback: v => v + ' Hz', maxTicksLimit: 13 },
+            ticks: { color: lC, font: { size: 11, family: 'Helvetica, Arial, sans-serif' }, callback: v => v + ' Hz', maxTicksLimit: 13 },
             grid: { color: gC },
-            title: { display: true, text: 'Frequency (Hz)', color: lC, font: { size: 11, family: "'Courier New',monospace" } }
+            title: { display: true, text: 'Frequency (Hz)', color: lC, font: { size: 11, family: 'Helvetica, Arial, sans-serif' } }
           },
           y: {
-            ticks: { color: lC, font: { size: 11, family: "'Courier New',monospace" }, callback: v => v.toFixed(0) + ' dB', maxTicksLimit: 7 },
+            ticks: { color: lC, font: { size: 11, family: 'Helvetica, Arial, sans-serif' }, callback: v => v.toFixed(0) + ' dB', maxTicksLimit: 7 },
             grid: { color: gC },
-            title: { display: true, text: 'Power (dB/Hz)', color: lC, font: { size: 11, family: "'Courier New',monospace" } }
+            title: { display: true, text: 'Power (dB/Hz)', color: lC, font: { size: 11, family: 'Helvetica, Arial, sans-serif' } }
           }
         }
       }
@@ -655,7 +623,7 @@
       minute: '2-digit',
       second: '2-digit'
     });
-    
+
     document.getElementById("lastModified").textContent = formatted;
   </script>
 

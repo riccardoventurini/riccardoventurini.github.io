@@ -6,17 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CV — Riccardo Venturini</title>
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@300;400&display=swap"
-    rel="stylesheet" />
-
   <style>
     :root {
-      --background: #faf8f4;
-      --text: #1a1a18;
-      --accent: #2a5c8f;
-      --gray: #6b6b65;
-      --border: #e0ddd6;
+      --background: #ffffff;
+      --text: #1a1a1a;
+      --text-muted: #6b6b6b;
+      --accent: #3b6ea5;
+      --border: #d6d6d6;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,122 +22,110 @@
     body {
       background: var(--background);
       color: var(--text);
-      font-family: 'EB Garamond', Georgia, serif;
-      font-size: 1.1rem;
-      line-height: 1.75;
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
 
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
     .container {
-      max-width: 800px;
+      max-width: 820px;
       margin: 0 auto;
-      padding: 3rem 2rem;
+      padding: 2.5rem 2.5rem 4rem;
     }
 
     .back {
       display: inline-block;
       margin-bottom: 2rem;
-      font-family: 'DM Mono', monospace;
       font-size: 0.85rem;
+      color: var(--text-muted);
     }
+    .back:hover { color: var(--accent); }
 
     h1 {
-      font-weight: 400;
-      font-size: 2rem;
+      font-weight: 700;
+      font-size: 1.7rem;
       margin-bottom: 0.3rem;
     }
 
     .subtitle {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.9rem;
-      color: var(--gray);
-      margin-bottom: 1.5rem;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-bottom: 1.4rem;
     }
 
     .contacts {
       display: flex;
       flex-wrap: wrap;
       gap: 0.4rem 1.2rem;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.82rem;
-      color: var(--gray);
-      margin-bottom: 2.5rem;
-      padding-bottom: 0;
-      border-bottom: none;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 2.2rem;
     }
 
-    .contacts a {
-      color: var(--gray);
-    }
+    .contacts a { color: var(--text-muted); }
     .contacts a:hover { color: var(--accent); }
 
     .section {
-      margin-top: 2.5rem;
-      border-top: 1px solid var(--border);
-      padding-top: 1.5rem;
+      margin-top: 2.4rem;
     }
 
     .section h2 {
-      font-family: 'DM Mono', monospace;
-      font-size: 1.15rem;
+      font-size: 1rem;
       font-weight: 700;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
       color: var(--text);
-      margin-bottom: 1.3rem;
+      margin-bottom: 1.2rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.5rem;
     }
 
-    /* Voci interne alla stessa sezione: nessuna linea, mezzo rigo di spazio */
     .entry {
-      margin-bottom: 1.6rem;
-      padding-bottom: 0;
-      border-bottom: none;
+      margin-bottom: 1.5rem;
     }
 
-    .entry:last-child {
-      margin-bottom: 0;
-    }
+    .entry:last-child { margin-bottom: 0; }
 
     .entry .date {
-      font-family: 'DM Mono', monospace;
       font-size: 0.78rem;
-      color: var(--gray);
-      letter-spacing: 0.03em;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
     }
 
     .entry .title {
-      font-weight: 600;
-      font-size: 1.05rem;
+      font-weight: 700;
+      font-size: 1rem;
       margin-top: 0.15rem;
+      max-width: 68ch;
     }
 
     .entry .place {
       font-style: italic;
-      font-size: 0.95rem;
-      color: var(--gray);
+      font-size: 0.9rem;
+      color: var(--text-muted);
       margin-top: 0.1rem;
+      max-width: 68ch;
     }
 
     .entry .desc {
       margin-top: 0.35rem;
-      font-size: 0.98rem;
-      color: #333;
+      font-size: 0.93rem;
+      color: var(--text);
+      max-width: 68ch;
     }
 
-    .entry .desc a {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.78rem;
-    }
+    .entry .desc a { font-size: 0.85rem; }
 
     footer {
       border-top: 1px solid var(--border);
       padding: 1.5rem 2rem;
       text-align: center;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--gray);
+      font-size: 0.78rem;
+      color: var(--text-muted);
     }
   </style>
 </head>
@@ -150,7 +134,7 @@
 
   <div class="container">
 
-    <a class="back" href="index.html">← Back to homepage</a>
+    <a class="back" href="index.html">&larr; Back to homepage</a>
 
     <h1>Riccardo Venturini</h1>
     <div class="subtitle">Psychologist — PhD Student in Theoretical and Experimental Linguistics</div>
@@ -176,15 +160,15 @@
         <div class="title">MSc in Psychology (Neuroscience track)</div>
         <div class="place">University of Trento, Rovereto (IT) — Grade: 110/110 cum laude</div>
         <div class="desc">Thesis: "Samples from data quality and data reliability assessment and validation of blindTHINGS dataset".<br>Supervisors: Prof. Martin Hebart (MPI CBS), Prof. Roberto Bottini (UniTn).</div>
-        </div>
-      
+      </div>
+
       <div class="entry">
         <div class="date">OCT 2018 – JUL 2021</div>
         <div class="title">BSc in Psychological Science</div>
         <div class="place">University of Padua, Padua (IT) — Grade: 110/110 cum laude</div>
         <div class="desc">Thesis: "Genuine and simulated emotions: kinematics of Duchenne Smile symmetry".<br>Supervisor: Prof. Luisa Sartori (UniPd).</div>
       </div>
-      
+
       <div class="entry">
         <div class="date">SEP 2016 – AUG 2018</div>
         <div class="title">Secondary School</div>
@@ -267,7 +251,6 @@
         <div class="title">3 R's of Trustworthy Science</div>
         <div class="place">University of Padova</div>
         <div class="desc">Methodological School on the scientific, philosophical, and statistical foundations of replicability (participation upon selection).</div>
-
       </div>
 
       <div class="entry">
@@ -289,7 +272,6 @@
         <div class="title">European Summer School in Sensory Neuroscience</div>
         <div class="place">University of Pisa</div>
         <div class="desc">Lectures and hands-on training in sensory neuroscience (participation upon selection).</div>
-
       </div>
 
       <div class="entry">
@@ -335,7 +317,7 @@
       <div class="entry">
         <div class="desc"><strong>Venturini, R.</strong>, Iaia, C., Canal, P., Frau, F., Bischetti, L., Tettamanti, M., Bambini, V., Tavano, A. Neural decoding across core language dimensions during naturalistic speech comprehension: from word-form to pragmatics. SNL 18th Annual Meeting, Geneve (Switzerland), 29 September – 2 October 2026. [Poster presentation]</div>
       </div>
-      
+
     </div>
 
     <!-- ============ HONORS, AWARDS, AND FUNDING ============ -->
@@ -352,13 +334,13 @@
     <!-- ============ ATTENDED CONFERENCES ============ -->
     <div class="section">
       <h2>Attended Conferences</h2>
-      
+
       <div class="entry">
         <div class="date">JUNE 2026 | PAVIA</div>
         <div class="title">RaAM specialised seminar</div>
         <div class="desc">Metaphor in vitro: from texts to brains</div>
       </div>
-      
+
       <div class="entry">
         <div class="date">MARCH 2026 | PAVIA</div>
         <div class="title">Discourse in Psychosis</div>

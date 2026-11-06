@@ -371,11 +371,17 @@
     const flags = { delta: true, alpha: true, beta: true, line: true, drift1: true, drift2: true, drift3: true, muscle: true };
     let rawSig = [], procSig = [];
 
-    // Deterministic pseudo-random generator
-    const rng = (function () { let s = 42; return function () { s = (s * 9301 + 49297) % 233280; return s / 233280; }; })();
+    // Seed of the pseudo-random generator (kept outside so we can reset it)
+    let seed = 42;
+
+    // Pseudo-random generator: returns a number between 0 and 1
+    const rng = function () { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
     function noise(a) { return (rng() * 2 - 1) * a; }
 
     function genRaw() {
+      // Reset the seed so the random noise is identical every time the raw signal is generated
+      seed = 42;
+
       rawSig = tArr.map(ti => {
         let v = 0;
         if (flags.delta)  v += 90 * Math.sin(2 * Math.PI * 2    * ti + .3)  + 50 * Math.sin(2 * Math.PI * 3.5 * ti + 1.1);

@@ -127,10 +127,74 @@
       font-size: 0.78rem;
       color: var(--text-muted);
     }
+
+    /* ============ SIDE MENU ============ */
+
+    /* Smooth scrolling when clicking a menu link */
+    html { scroll-behavior: smooth; }
+
+    /* Leave space above the title when jumping to a section */
+    .section { scroll-margin-top: 1.5rem; }
+
+    /* Side menu: fixed on the left, visible only on wide screens */
+    .side-menu {
+      position: fixed;
+      top: 2.5rem;
+      left: 2rem;
+      width: 200px;
+      font-size: 0.85rem;
+    }
+
+    .side-menu h3 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .side-menu ul {
+      list-style: none;
+    }
+
+    .side-menu li {
+      margin-bottom: 0.5rem;
+    }
+
+    .side-menu a {
+      color: var(--text-muted);
+    }
+
+    .side-menu a:hover {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* Hide the menu on narrow screens (phones, small windows) */
+    @media (max-width: 1250px) {
+      .side-menu { display: none; }
+    }
   </style>
 </head>
 
 <body>
+
+  <!-- Side menu: each link points to the id of a section -->
+  <nav class="side-menu">
+    <h3>Contents</h3>
+    <ul>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#internships">Internships and Training</a></li>
+      <li><a href="#abroad">Visiting Experiences Abroad</a></li>
+      <li><a href="#schools">Summer Schools and Workshops</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#teaching">Teaching</a></li>
+      <li><a href="#honors">Honors, Awards, and Funding</a></li>
+      <li><a href="#service">Academic Service</a></li>
+      <li><a href="#conferences">Attended Conferences</a></li>
+      <li><a href="#research">Research Activities</a></li>
+    </ul>
+  </nav>
 
   <div class="container">
 
@@ -145,7 +209,7 @@
     </div>
 
     <!-- ============ EDUCATION ============ -->
-    <div class="section">
+    <div class="section" id="education">
       <h2>Education</h2>
 
       <div class="entry">
@@ -184,7 +248,7 @@
     </div>
 
     <!-- ============ INTERNSHIPS AND TRAINING EXPERIENCES ============ -->
-    <div class="section">
+    <div class="section" id="internships">
       <h2>Internships and Training Experiences</h2>
 
       <div class="entry">
@@ -224,7 +288,7 @@
     </div>
 
     <!-- ============ TRAINING AND VISITING EXPERIENCES ABROAD ============ -->
-    <div class="section">
+    <div class="section" id="abroad">
       <h2>Training and Visiting Experiences Abroad</h2>
 
       <div class="entry">
@@ -243,7 +307,7 @@
     </div>
 
     <!-- ============ SUMMER SCHOOLS AND WORKSHOPS ============ -->
-    <div class="section">
+    <div class="section" id="schools">
       <h2>Summer Schools and Workshops</h2>
 
       <div class="entry">
@@ -283,7 +347,7 @@
     </div>
 
     <!-- ============ PUBLICATIONS ============ -->
-    <div class="section">
+    <div class="section" id="publications">
       <h2>Publications</h2>
 
       <div class="entry">
@@ -325,7 +389,7 @@
     </div>
 
     <!-- ============ TEACHING AND WORKSHOPS DELIVERED ============ -->
-    <div class="section">
+    <div class="section" id="teaching">
       <h2>Teaching</h2>
 
       <!-- Tutoring for undergraduate students -->
@@ -335,27 +399,25 @@
         <div class="place">Course "Foundations of Neurolinguistics and Methodology" taught by Prof. Valentina Bambini.</div>
         <div class="desc">Tutoring on analysis methods in neuropragmatics, with a focus on event-related potentials, functional connectivity, and oscillatory activity (4 hours).</div>
       </div>
-    
+
       <div class="entry">
         <div class="date">NOV 2026</div>
         <div class="title">How rich is the EEG signal? A hands-on introduction to time-resolved decoding</div>
         <div class="place">Padova Open Neuroscience Symposium (PONS), University of Padova</div>
         <div class="desc">Hands-on workshop introducing time-resolved multivariate decoding in the context of human neurophysiology data. </div>
       </div>
-    </div>
 
-    <!-- Tutoring for undergraduate students -->
+      <!-- Tutoring for undergraduate students -->
       <div class="entry">
         <div class="date">MAY 2026</div>
         <div class="title">Tutoring for undergraduate students</div>
         <div class="place">Course "Foundations of Neurolinguistics and Methodology" taught by Prof. Valentina Bambini.</div>
         <div class="desc">Tutoring on analysis methods in neuropragmatics, with a focus on event-related potentials, functional connectivity, and oscillatory activity (4 hours).</div>
       </div>
-
-    
+    </div>
 
     <!-- ============ HONORS, AWARDS, AND FUNDING ============ -->
-    <div class="section">
+    <div class="section" id="honors">
       <h2>Honors, Awards, and Funding</h2>
 
       <div class="entry">
@@ -366,9 +428,9 @@
     </div>
 
     <!-- ============ ACADEMIC SERVICE AND REPRESENTATION ============ -->
-    <div class="section">
+    <div class="section" id="service">
       <h2>Academic Service and Representation</h2>
-    
+
       <div class="entry">
         <div class="date">OCT 2026 – ONGOING</div>
         <div class="title">Doctoral researchers' Representative in the Academic Senate</div>
@@ -380,24 +442,23 @@
         <div class="title">Doctoral researchers' Representative in the University Quality Committee</div>
         <div class="place">University School for Advanced Studies IUSS, Pavia</div>
       </div>
-    
+
       <div class="entry">
         <div class="date">DEC 2025 – ONGOING</div>
         <div class="title">Member of the Steering Committee of ADI Pavia</div>
         <div class="place">ADI (Italian Association of PhD Candidates and PhDs) Pavia </div>
         <div class="desc">Local coordination of the national association representing and advocating for PhD candidates, research fellows, and early-career researchers.</div>
       </div>
-    </div>
 
-    <div class="entry">
-      <div class="title">Ad hoc reviewer</div>
-      <div class="place">
-        Neuropsychologia
+      <!-- Moved inside the section (it was outside before) -->
+      <div class="entry">
+        <div class="title">Ad hoc reviewer</div>
+        <div class="place">Neuropsychologia</div>
       </div>
     </div>
-    
+
     <!-- ============ ATTENDED CONFERENCES ============ -->
-    <div class="section">
+    <div class="section" id="conferences">
       <h2>Attended Conferences</h2>
 
       <div class="entry">
@@ -450,7 +511,7 @@
     </div>
 
     <!-- ============ PARTICIPATION TO RESEARCH ACTIVITIES ============ -->
-    <div class="section">
+    <div class="section" id="research">
       <h2>Participation to Research Activities</h2>
 
       <div class="entry">
@@ -482,8 +543,10 @@
   </footer>
 
   <script>
+    // Read the date of the last file modification
     const lastModified = new Date(document.lastModified);
 
+    // Format it in Italian style (dd/mm/yyyy, hh:mm:ss)
     const formatted = lastModified.toLocaleString('it-IT', {
       day: '2-digit',
       month: '2-digit',
@@ -493,6 +556,7 @@
       second: '2-digit'
     });
 
+    // Show it in the footer
     document.getElementById("lastModified").textContent = formatted;
   </script>
 
